@@ -1,17 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Net.Http;
 using System.Runtime.Serialization;
 using System.Runtime.Serialization.Json;
 using System.Text;
 using System.Threading.Tasks;
+using Windows.UI.Xaml.Media.Imaging;
 
 namespace TicketTracker.Models
 {
     public class TicketMasterData
     {
-        public async static Task<RootObject> GetData(string countryCode)
+        public async static Task<List<Event>> GetEvents(string countryCode)
         {
             var http = new HttpClient();
             var respone = await http.GetAsync("https://app.ticketmaster.com/discovery/v2/events.json?apikey=5AdNWJcac0sUjTXt0rQY5lnGJio8OvvN&countryCode=IE&size=1");
@@ -23,11 +25,22 @@ namespace TicketTracker.Models
 
             var data = (RootObject)serializer.ReadObject(ms);
 
-            return data;
+            var events = new List<Event>();
+
+            for (int i = 0; i < data._embedded.events.Count(); i++)
+            {
+                string name = data._embedded.events[i].name;
+                BitmapImage image = new BitmapImage(new Uri(data._embedded.events[i].images[0].url));
+                string id = data._embedded.events[i].id;
+
+                events.Add(new Event { id = id, name = name, image = image});
+            }
+
+            return events;
 
         }
-
     }
+
     [DataContract]
     public class Image
     {
@@ -501,6 +514,7 @@ namespace TicketTracker.Models
     [DataContract]
     public class Event
     {
+        public BitmapImage image { get; set; }
         [DataMember]
         public string name { get; set; }
         [DataMember]

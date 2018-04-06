@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
@@ -22,18 +24,31 @@ namespace TicketTracker
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
-    public sealed partial class MainPage : Windows.UI.Xaml.Controls.Page
+    public sealed partial class MainPage : Windows.UI.Xaml.Controls.Page, INotifyPropertyChanged
     {
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        private List<Event> _events;
+        public List<Event> Events
+        {
+            get { return _events; }
+            set {
+                if (value != _events){ 
+                   _events = value;
+                    PropertyChanged?.DynamicInvoke(nameof(Events));
+                }
+            }
+        }
+
         public MainPage()
         {
             this.InitializeComponent();
         }
 
-        private async void Button_Click(object sender, RoutedEventArgs e)
+        private async void Page_Loaded(object sender, RoutedEventArgs e)
         {
-            RootObject myData = await TicketMasterData.GetData("IE");
-            ResultImage.Source = new BitmapImage(new Uri(myData._embedded.events[0].images[0].url));
-            ResultTextBlock.Text = myData._embedded.events[0].name;
+            Events = await TicketMasterData.GetEvents("IE");
         }
     }
 }

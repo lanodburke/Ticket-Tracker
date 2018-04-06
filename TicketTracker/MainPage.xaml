@@ -5,13 +5,38 @@
     xmlns:local="using:TicketTracker"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:local1="using:TicketTracker.Models"
+    Loaded="Page_Loaded"
     mc:Ignorable="d">
 
-    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-        <StackPanel Background="HotPink">
-            <Button Content="Get Data" Click="Button_Click"></Button>
-            <TextBlock Name="ResultTextBlock"></TextBlock>
-            <Image Name="ResultImage"></Image>
-        </StackPanel>
+    <Grid Background="{ThemeResource AppBarBackgroundThemeBrush}">
+        <GridView Name="EventItemGrid"
+            ItemsSource = "{x:Bind Events}"
+            HorizontalAlignment = "Stretch"
+            Margin="10,0,0,0">
+            <GridView.ItemTemplate>
+                <DataTemplate x:DataType="local1:Event">
+                    <Grid Background="White"
+                          Margin="10"
+                          Height="270"
+                          Width="200">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <Image Name="MyImage"
+                               Source="{x:Bind image}"/>
+                        <StackPanel Grid.Row="1" Margin="10">
+                            <TextBlock Text="{x:Bind name}"
+                                       Name="NameTXT"
+                                       FontSize="18"
+                                       TextWrapping="Wrap"/>
+                        </StackPanel>
+
+                    </Grid>
+                </DataTemplate>
+            </GridView.ItemTemplate>
+        </GridView>
     </Grid>
+    
 </Page>
