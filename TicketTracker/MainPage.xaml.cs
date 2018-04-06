@@ -5,7 +5,6 @@ using System.ComponentModel;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
-using TicketTracker.Models;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.UI.Xaml;
@@ -24,31 +23,22 @@ namespace TicketTracker
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
-    public sealed partial class MainPage : Windows.UI.Xaml.Controls.Page, INotifyPropertyChanged
+    public sealed partial class MainPage : Windows.UI.Xaml.Controls.Page
     {
-
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        private List<Event> _events;
-        public List<Event> Events
-        {
-            get { return _events; }
-            set {
-                if (value != _events){ 
-                   _events = value;
-                    PropertyChanged?.DynamicInvoke(nameof(Events));
-                }
-            }
-        }
 
         public MainPage()
         {
             this.InitializeComponent();
         }
 
+        private ObservableCollection<Event> Events = new ObservableCollection<Event>();
+
         private async void Page_Loaded(object sender, RoutedEventArgs e)
         {
-            Events = await TicketMasterData.GetEvents("IE");
+            foreach (var movie in await TicketMasterData.GetEvents("IE"))
+            {
+                Events.Add(movie);
+            }
         }
     }
 }

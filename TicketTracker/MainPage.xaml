@@ -5,17 +5,37 @@
     xmlns:local="using:TicketTracker"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:local1="using:TicketTracker.Models"
     Loaded="Page_Loaded"
     mc:Ignorable="d">
 
-    <Grid Background="{ThemeResource AppBarBackgroundThemeBrush}">
+    <!--<Page.Resources>
+        <DataTemplate x:DataType="local:Event" x:Key="EventDataTemplate">
+            <StackPanel>
+                <TextBlock x:Name="eventId" Text="{x:Bind id}" FontSize="12" Foreground="Black" />
+                <Image x:Name="eventImage" Source="{x:Bind image}" Width="145" Height="214"/>
+                <TextBlock x:Name="eventName" Text="{x:Bind name}" FontSize="16" Foreground="Black"/>
+            </StackPanel>
+        </DataTemplate>
+    </Page.Resources>
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="100" />
+        </Grid.RowDefinitions>
+
+        <GridView Grid.Row="0" ItemsSource="{x:Bind Events}" ItemTemplate="{StaticResource EventDataTemplate}">
+
+        </GridView>
+
+    </Grid>-->
+
+    <Grid Background="LightGray">
         <GridView Name="EventItemGrid"
-            ItemsSource = "{x:Bind Events}"
-            HorizontalAlignment = "Stretch"
-            Margin="10,0,0,0">
+            ItemsSource="{x:Bind Events}"
+                  HorizontalAlignment="Stretch"
+                  Margin="10,0,0,0">
             <GridView.ItemTemplate>
-                <DataTemplate x:DataType="local1:Event">
+                <DataTemplate x:DataType="local:Event">
                     <Grid Background="White"
                           Margin="10"
                           Height="270"
@@ -24,19 +44,16 @@
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="*"/>
                         </Grid.RowDefinitions>
-                        <Image Name="MyImage"
-                               Source="{x:Bind image}"/>
-                        <StackPanel Grid.Row="1" Margin="10">
-                            <TextBlock Text="{x:Bind name}"
-                                       Name="NameTXT"
-                                       FontSize="18"
-                                       TextWrapping="Wrap"/>
+                        <Image x:Name="eventImage" Source="{x:Bind image}"/>
+                        <StackPanel Grid.Row="1" Margin="5">
+                            <TextBlock x:Name="eventName" Text="{x:Bind name}" FontSize="18" TextWrapping="Wrap"/>
                         </StackPanel>
-
                     </Grid>
                 </DataTemplate>
             </GridView.ItemTemplate>
+
+
         </GridView>
     </Grid>
-    
+
 </Page>

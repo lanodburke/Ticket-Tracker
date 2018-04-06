@@ -9,17 +9,16 @@ using System.Text;
 using System.Threading.Tasks;
 using Windows.UI.Xaml.Media.Imaging;
 
-namespace TicketTracker.Models
+namespace TicketTracker
 {
     public class TicketMasterData
     {
         public async static Task<List<Event>> GetEvents(string countryCode)
         {
             var http = new HttpClient();
-            var respone = await http.GetAsync("https://app.ticketmaster.com/discovery/v2/events.json?apikey=5AdNWJcac0sUjTXt0rQY5lnGJio8OvvN&countryCode=IE&size=1");
+            var respone = await http.GetAsync("https://app.ticketmaster.com/discovery/v2/events.json?apikey=5AdNWJcac0sUjTXt0rQY5lnGJio8OvvN&countryCode=" + countryCode);
             var result = await respone.Content.ReadAsStringAsync();
             var serializer = new DataContractJsonSerializer(typeof(RootObject));
-
 
             var ms = new System.IO.MemoryStream(Encoding.UTF8.GetBytes(result));
 
@@ -30,14 +29,15 @@ namespace TicketTracker.Models
             for (int i = 0; i < data._embedded.events.Count(); i++)
             {
                 string name = data._embedded.events[i].name;
-                BitmapImage image = new BitmapImage(new Uri(data._embedded.events[i].images[0].url));
+                Console.WriteLine(name);
+                BitmapImage image = new BitmapImage(new Uri(data._embedded.events[i].images[1].url));
                 string id = data._embedded.events[i].id;
+                Console.WriteLine(id);
 
-                events.Add(new Event { id = id, name = name, image = image});
+                events.Add(new Event { id = id, name = name, image = image });
             }
 
             return events;
-
         }
     }
 
