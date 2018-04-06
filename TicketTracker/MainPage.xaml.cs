@@ -40,5 +40,10 @@ namespace TicketTracker
                 Events.Add(movie);
             }
         }
+
+        private void Rectangle_PointerPressed(object sender, PointerRoutedEventArgs e)
+        {
+
+        }
     }
 }

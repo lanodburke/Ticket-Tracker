@@ -48,7 +48,12 @@
                         <StackPanel Grid.Row="1" Margin="5">
                             <TextBlock x:Name="eventName" Text="{x:Bind name}" FontSize="18" TextWrapping="Wrap"/>
                         </StackPanel>
+                        <Rectangle HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Fill="Transparent" Grid.Column="0" Grid.Row="0"
+                                   PointerPressed="Rectangle_PointerPressed">
+                            
+                        </Rectangle>
                     </Grid>
+
                 </DataTemplate>
             </GridView.ItemTemplate>
 
