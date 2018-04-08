@@ -15,6 +15,7 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Media.Imaging;
 using Windows.UI.Xaml.Navigation;
+using Windows.UI.Xaml.Shapes;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
 
@@ -41,9 +42,12 @@ namespace TicketTracker
             }
         }
 
-        private void Rectangle_PointerPressed(object sender, PointerRoutedEventArgs e)
+        private void Goto_Event_Details_Page(object sender, ItemClickEventArgs e)
         {
-
+            var myEvent = e.ClickedItem as Event;
+            Frame.Navigate(typeof(EventDetailPage), myEvent.id);
+            //Frame.Navigate(typeof(EventDetailPage), myEvent.id);
+            
         }
     }
 }

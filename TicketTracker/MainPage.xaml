@@ -31,9 +31,12 @@
 
     <Grid Background="LightGray">
         <GridView Name="EventItemGrid"
-            ItemsSource="{x:Bind Events}"
+                  ItemsSource="{x:Bind Events}"
                   HorizontalAlignment="Stretch"
-                  Margin="10,0,0,0">
+                  Margin="10,0,0,0"
+                  IsTapEnabled="True"
+                  IsItemClickEnabled="True"
+                  ItemClick="Goto_Event_Details_Page">
             <GridView.ItemTemplate>
                 <DataTemplate x:DataType="local:Event">
                     <Grid Background="White"
@@ -48,10 +51,6 @@
                         <StackPanel Grid.Row="1" Margin="5">
                             <TextBlock x:Name="eventName" Text="{x:Bind name}" FontSize="18" TextWrapping="Wrap"/>
                         </StackPanel>
-                        <Rectangle HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Fill="Transparent" Grid.Column="0" Grid.Row="0"
-                                   PointerPressed="Rectangle_PointerPressed">
-                            
-                        </Rectangle>
                     </Grid>
 
                 </DataTemplate>

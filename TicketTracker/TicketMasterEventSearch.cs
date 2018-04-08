@@ -39,6 +39,33 @@ namespace TicketTracker
 
             return events;
         }
+        public async static Task<List<Event>> GetEventDetails(string eventId)
+        {
+            var http = new HttpClient();
+            var respone = await http.GetAsync("https://app.ticketmaster.com/discovery/v2/events/"+ eventId +".json?apikey=5AdNWJcac0sUjTXt0rQY5lnGJio8OvvN");
+            var result = await respone.Content.ReadAsStringAsync();
+            var serializer = new DataContractJsonSerializer(typeof(RootObject));
+
+            var ms = new System.IO.MemoryStream(Encoding.UTF8.GetBytes(result));
+
+            var data = (RootObject)serializer.ReadObject(ms);
+
+            var events = new List<Event>();
+
+            for (int i = 0; i < data._embedded.events.Count(); i++)
+            {
+                string name = data._embedded.events[i].name;
+                BitmapImage image = new BitmapImage(new Uri(data._embedded.events[i].images[1].url));
+                
+                
+
+                events.Add(new Event { name = name, image = image });
+            }
+
+            return events;
+        }
+
+
     }
 
     [DataContract]
@@ -58,16 +85,15 @@ namespace TicketTracker
     [DataContract]
     public class Public
     {
-        /*
         [DataMember]
-        public DateTime startDateTime { get; set; }
-        */
+        public string startDateTime { get; set; }
+
         [DataMember]
         public bool startTBD { get; set; }
-        /*
+
         [DataMember]
-        public DateTime endDateTime { get; set; }
-        */
+        public string endDateTime { get; set; }
+
     }
     [DataContract]
     public class Sales
@@ -82,10 +108,9 @@ namespace TicketTracker
         public string localDate { get; set; }
         [DataMember]
         public string localTime { get; set; }
-        /*
+ 
         [DataMember]
-        public DateTime dateTime { get; set; }
-        */
+        public string dateTime { get; set; }
         [DataMember]
         public bool dateTBD { get; set; }
         [DataMember]
