@@ -42,7 +42,7 @@ namespace TicketTracker
         public async static Task<List<Event>> GetEventDetails(string eventId)
         {
             var http = new HttpClient();
-            var respone = await http.GetAsync("https://app.ticketmaster.com/discovery/v2/events/"+ eventId +".json?apikey=5AdNWJcac0sUjTXt0rQY5lnGJio8OvvN");
+            var respone = await http.GetAsync("https://app.ticketmaster.com/discovery/v2/events/" + eventId + ".json?apikey=5AdNWJcac0sUjTXt0rQY5lnGJio8OvvN");
             var result = await respone.Content.ReadAsStringAsync();
             var serializer = new DataContractJsonSerializer(typeof(RootObject));
 
@@ -56,8 +56,8 @@ namespace TicketTracker
             {
                 string name = data._embedded.events[i].name;
                 BitmapImage image = new BitmapImage(new Uri(data._embedded.events[i].images[1].url));
-                
-                
+
+
 
                 events.Add(new Event { name = name, image = image });
             }
@@ -108,7 +108,7 @@ namespace TicketTracker
         public string localDate { get; set; }
         [DataMember]
         public string localTime { get; set; }
- 
+
         [DataMember]
         public string dateTime { get; set; }
         [DataMember]
