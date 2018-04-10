@@ -32,10 +32,10 @@ namespace TicketTracker
                 Console.WriteLine(name);
                 BitmapImage image = new BitmapImage(new Uri(data._embedded.events[i].images[1].url));
                 string id = data._embedded.events[i].id;
-
+                string venueName = data._embedded.events[i]._embedded.venues[0].name;
                 Console.WriteLine(id);
 
-                events.Add(new Event { id = id, name = name, image = image });
+                events.Add(new Event { id = id, name = name, image = image, venueName = venueName});
             }
 
             return events;
@@ -513,6 +513,7 @@ namespace TicketTracker
     [DataContract]
     public class Event
     {
+        public string venueName { get; set; }
         public BitmapImage image { get; set; }
         [DataMember]
         public string name { get; set; }

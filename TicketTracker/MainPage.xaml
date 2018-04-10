@@ -40,8 +40,8 @@
                     <Image Source="{x:Bind image}" Stretch="UniformToFill"/>
                     <StackPanel Orientation="Vertical" Height="60" VerticalAlignment="Bottom" Opacity="0.80" Background="Azure" Padding="12">
                         <TextBlock Text="{x:Bind name}"/>
-                        <!--<TextBlock Text="{x:Bind }" Style="{ThemeResource CaptionTextBlockStyle}" Foreground="{ThemeResource SystemControlPageTextBaseMediumBrush}"/>-->
-                    </StackPanel>
+                        <TextBlock Text="{x:Bind venueName}" Style="{ThemeResource CaptionTextBlockStyle}" Foreground="{ThemeResource SystemControlPageTextBaseMediumBrush}"/>
+                        </StackPanel>
                 </Grid>
             </DataTemplate>
         </GridView.ItemTemplate>
