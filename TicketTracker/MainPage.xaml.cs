@@ -24,12 +24,31 @@ namespace TicketTracker
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
-    public sealed partial class MainPage : Windows.UI.Xaml.Controls.Page
+    public sealed partial class MainPage : Windows.UI.Xaml.Controls.Page, INotifyPropertyChanged
     {
+        private ObservableCollection<Tuple<string,string>> Countries = new ObservableCollection<Tuple<string, string>>();
 
         public MainPage()
         {
             this.InitializeComponent();
+            Countries.Add(new Tuple<string, string>("US", "United States"));
+            Countries.Add(new Tuple<string, string>("IE", "Ireland"));
+            Countries.Add(new Tuple<string, string>("CA", "Canada"));
+
+            DataContext = Countries;
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged
+        {
+            add
+            {
+                ((INotifyPropertyChanged)Events).PropertyChanged += value;
+            }
+
+            remove
+            {
+                ((INotifyPropertyChanged)Events).PropertyChanged -= value;
+            }
         }
 
         private ObservableCollection<Event> Events = new ObservableCollection<Event>();
@@ -46,6 +65,25 @@ namespace TicketTracker
         {
             var myEvent = e.ClickedItem as Event;
             Frame.Navigate(typeof(EventDetailPage), myEvent.id);            
+        }
+
+        private async void CountriesCombo_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if(CountriesCombo.SelectedItem != null)
+            {
+                string countryCode = "IE";
+                if (CountriesCombo.Tag != null) // combo tag is currently null
+                {
+                    countryCode = (string)CountriesCombo.Tag;
+                } 
+                
+                Events.Clear();
+                foreach (var eventThing in await TicketMasterData.GetEvents(countryCode))
+                {
+                    Events.Add(eventThing);
+                }
+            }
+
         }
     }
 }

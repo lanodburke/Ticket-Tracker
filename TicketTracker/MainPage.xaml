@@ -29,29 +29,49 @@
 
     </Grid>-->
 
+    <ScrollViewer VerticalScrollBarVisibility="Auto" VerticalScrollMode="Auto" HorizontalScrollBarVisibility="Disabled" HorizontalScrollMode="Disabled">
     <Grid Background="LightGray">
-        <GridView ItemsSource="{x:Bind Events}"
+        <Grid.RowDefinitions>
+            <RowDefinition Height="100"/>
+            <RowDefinition Height="auto"/>
+        </Grid.RowDefinitions>
+        <StackPanel Grid.Row="0" Padding="15">
+                <ComboBox x:Name="CountriesCombo" Header="Select Country Code" Height="60" Width="auto"
+                      ItemsSource="{Binding}"
+                         IsEnabled="True"
+                          SelectionChanged="CountriesCombo_SelectionChanged">
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate>
+                            <ComboBoxItem IsSelected="True" IsTapEnabled="False" Tag="{Binding Item1}" Content="{Binding Item2}"></ComboBoxItem>
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
+                </ComboBox>
+            </StackPanel>
+
+            <GridView ItemsSource="{x:Bind Events}"
               IsTapEnabled="True"
               IsItemClickEnabled="True"
-              ItemClick="Goto_Event_Details_Page">
-            <GridView.ItemTemplate>
-            <DataTemplate x:Name="EventDataTemplate" x:DataType="local:Event">
-                <Grid Height="180" Width="320" AutomationProperties.Name="{x:Bind name}">
-                    <Image Source="{x:Bind image}" Stretch="UniformToFill"/>
-                    <StackPanel Orientation="Vertical" Height="60" VerticalAlignment="Bottom" Opacity="0.80" Background="Azure" Padding="12">
-                        <TextBlock Text="{x:Bind name}"/>
-                        <TextBlock Text="{x:Bind venueName}" Style="{ThemeResource CaptionTextBlockStyle}" Foreground="{ThemeResource SystemControlPageTextBaseMediumBrush}"/>
-                    </StackPanel>
-                </Grid>
-            </DataTemplate>
-        </GridView.ItemTemplate>
-        <GridView.ItemsPanel>
-            <ItemsPanelTemplate>
-                <ItemsWrapGrid MaximumRowsOrColumns="4" Orientation="Horizontal"/>
-            </ItemsPanelTemplate>
-        </GridView.ItemsPanel>
-    </GridView>
-    </Grid>
+              ItemClick="Goto_Event_Details_Page"
+              Grid.Row="1">
+                <GridView.ItemTemplate>
+                    <DataTemplate x:Name="EventDataTemplate" x:DataType="local:Event">
+                        <Grid Height="180" Width="320" AutomationProperties.Name="{x:Bind name}">
+                            <Image Source="{x:Bind image}" Stretch="UniformToFill"/>
+                            <StackPanel Orientation="Vertical" Height="60" VerticalAlignment="Bottom" Opacity="0.80" Background="Azure" Padding="12">
+                                <TextBlock Text="{x:Bind name}"/>
+                                <TextBlock Text="{x:Bind venueName}" Style="{ThemeResource CaptionTextBlockStyle}" Foreground="{ThemeResource SystemControlPageTextBaseMediumBrush}"/>
+                            </StackPanel>
+                        </Grid>
+                    </DataTemplate>
+                </GridView.ItemTemplate>
+                <GridView.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <ItemsWrapGrid MaximumRowsOrColumns="4" Orientation="Horizontal"/>
+                    </ItemsPanelTemplate>
+                </GridView.ItemsPanel>
+            </GridView>
+        </Grid>
+    </ScrollViewer>
 
     <!--<Grid Background="LightGray">
         <GridView Name="EventItemGrid"
