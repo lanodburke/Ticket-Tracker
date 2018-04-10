@@ -45,9 +45,7 @@ namespace TicketTracker
         private void Goto_Event_Details_Page(object sender, ItemClickEventArgs e)
         {
             var myEvent = e.ClickedItem as Event;
-            Frame.Navigate(typeof(EventDetailPage), myEvent.id);
-            //Frame.Navigate(typeof(EventDetailPage), myEvent.id);
-            
+            Frame.Navigate(typeof(EventDetailPage), myEvent.id);            
         }
     }
 }

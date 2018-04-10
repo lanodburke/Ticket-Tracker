@@ -5,9 +5,30 @@
     xmlns:local="using:TicketTracker"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Loaded="Page_Loaded"
     mc:Ignorable="d">
 
+    <Page.Resources>
+        <DataTemplate x:DataType="local:RootObject1" x:Key="DetailDataTemplate">
+            <StackPanel>
+                <TextBlock x:Name="eventId" Text="{x:Bind id}" FontSize="12" Foreground="Black" />
+                <Image x:Name="eventImage" Source="{x:Bind image}"/>
+                <TextBlock x:Name="eventName" Text="{x:Bind name}" FontSize="16" Foreground="Black"/>
+                <TextBlock x:Name="venueName" Text="{x:Bind venueName}" FontSize="16" Foreground="Black"/>
+                <TextBlock x:Name="eventLong" Text="{x:Bind longitude}" FontSize="16" Foreground="Black"/>
+                <TextBlock x:Name="eventLat" Text="{x:Bind latitude}" FontSize="16" Foreground="Black"/>
+            </StackPanel>
+        </DataTemplate>
+    </Page.Resources>
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="100" />
+        </Grid.RowDefinitions>
+
+        <GridView Grid.Row="0" ItemsSource="{x:Bind Details}" ItemTemplate="{StaticResource DetailDataTemplate}">
+
+        </GridView>
 
     </Grid>
 </Page>

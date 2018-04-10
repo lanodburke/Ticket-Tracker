@@ -25,21 +25,24 @@ namespace TicketTracker
 
             var events = new List<RootObject1>();
 
-            string name = events[0].name;
+            string name = data.name;
             BitmapImage image = new BitmapImage(new Uri(data.images[4].url));
-            string eventInfo = events[0].pleaseNote;
+            string eventInfo = data.pleaseNote;
 
             for (int i = 0; i < data._embedded.venues.Count(); i++)
             {
                 Location2 loc = new Location2();
 
-                string longitude = events[0]._embedded.venues[i].location.longitude;
-                string latitude = events[0]._embedded.venues[i].location.latitude;
+                GeneralInfo venueInfo = data._embedded.venues[0].generalInfo;
+                string venuName = data._embedded.venues[0].name;
+                Address2 address = data._embedded.venues[0].address;
+                string longitude = data._embedded.venues[0].location.longitude;
+                string latitude = data._embedded.venues[0].location.latitude;
 
                 loc.longitude = longitude;
                 loc.latitude = latitude;
 
-                events.Add(new RootObject1 { name = name, image = image, location = loc});
+                events.Add(new RootObject1 { name = name, image = image, eventInfo = eventInfo, location = loc, genInfo = venueInfo, address = address, venueName = venuName, longitude = longitude, latitude = latitude});
             }
 
             return events;
@@ -67,11 +70,11 @@ namespace TicketTracker
     public class Public2
     {
         [DataMember]
-        public DateTime startDateTime { get; set; }
+        public string startDateTime { get; set; }
         [DataMember]
         public bool startTBD { get; set; }
         [DataMember]
-        public DateTime endDateTime { get; set; }
+        public string endDateTime { get; set; }
     }
 
     [DataContract]
@@ -89,7 +92,7 @@ namespace TicketTracker
         [DataMember]
         public string localTime { get; set; }
         [DataMember]
-        public DateTime dateTime { get; set; }
+        public string dateTime { get; set; }
         [DataMember]
         public bool dateTBD { get; set; }
         [DataMember]
@@ -560,6 +563,12 @@ namespace TicketTracker
     [DataContract]
     public class RootObject1
     {
+        public string latitude { get; set; }
+        public string longitude { get; set; }
+        public string venueName { get; set; }
+        public string eventInfo { get; set; }
+        public Address2 address { get; set; }
+        public GeneralInfo genInfo { get; set; }
         public Location2 location { get; set; }
         public BitmapImage image { get; set; }
         [DataMember]
