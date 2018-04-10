@@ -12,7 +12,7 @@ namespace TicketTracker
 {
     class TicketMasterDataEventDetails
     {
-        public async static Task<List<RootObject1>> GetEventDetails(string eventId)
+        public async static Task<RootObject1> GetEventDetails(string eventId)
         {
             var http = new HttpClient();
             var respone = await http.GetAsync("https://app.ticketmaster.com/discovery/v2/events/" + eventId + ".json?apikey=5AdNWJcac0sUjTXt0rQY5lnGJio8OvvN");
@@ -23,29 +23,25 @@ namespace TicketTracker
 
             var data = (RootObject1)serializer.ReadObject(ms);
 
-            var events = new List<RootObject1>();
+            RootObject1 rootObject1;
 
             string name = data.name;
             BitmapImage image = new BitmapImage(new Uri(data.images[4].url));
             string eventInfo = data.pleaseNote;
+            Location2 loc = new Location2();
 
-            for (int i = 0; i < data._embedded.venues.Count(); i++)
-            {
-                Location2 loc = new Location2();
+            GeneralInfo venueInfo = data._embedded.venues[0].generalInfo;
+            string venuName = data._embedded.venues[0].name;
+            Address2 address = data._embedded.venues[0].address;
+            string longitude = data._embedded.venues[0].location.longitude;
+            string latitude = data._embedded.venues[0].location.latitude;
 
-                GeneralInfo venueInfo = data._embedded.venues[0].generalInfo;
-                string venuName = data._embedded.venues[0].name;
-                Address2 address = data._embedded.venues[0].address;
-                string longitude = data._embedded.venues[0].location.longitude;
-                string latitude = data._embedded.venues[0].location.latitude;
+            loc.longitude = longitude;
+            loc.latitude = latitude;
 
-                loc.longitude = longitude;
-                loc.latitude = latitude;
+            rootObject1 = new RootObject1 { name = name, image = image, eventInfo = eventInfo, address = address, longitude = longitude, latitude = latitude };
 
-                events.Add(new RootObject1 { name = name, image = image, eventInfo = eventInfo, location = loc, genInfo = venueInfo, address = address, venueName = venuName, longitude = longitude, latitude = latitude});
-            }
-
-            return events;
+            return rootObject1;
         }
     }
 

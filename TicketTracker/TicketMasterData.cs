@@ -26,6 +26,8 @@ namespace TicketTracker
 
             var events = new List<Event>();
 
+            
+
             for (int i = 0; i < data._embedded.events.Count(); i++)
             {
                 string name = data._embedded.events[i].name;

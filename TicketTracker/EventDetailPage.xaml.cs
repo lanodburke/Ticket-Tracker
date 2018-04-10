@@ -35,14 +35,11 @@ namespace TicketTracker
             this.eventId = (string)e.Parameter;
         }
 
-        private ObservableCollection<RootObject1> Details = new ObservableCollection<RootObject1>();
-
         private async void Page_Loaded(object sender, RoutedEventArgs e)
         {
-            foreach (var details in await TicketMasterDataEventDetails.GetEventDetails(this.eventId))
-            {
-                Details.Add(details);
-            }
+            RootObject1 myDetails = await TicketMasterDataEventDetails.GetEventDetails(this.eventId);
+            
+            
         }
     }
 }
