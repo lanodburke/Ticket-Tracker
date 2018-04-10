@@ -30,6 +30,30 @@
     </Grid>-->
 
     <Grid Background="LightGray">
+        <GridView ItemsSource="{x:Bind Events}"
+              IsTapEnabled="True"
+              IsItemClickEnabled="True"
+              ItemClick="Goto_Event_Details_Page">
+            <GridView.ItemTemplate>
+            <DataTemplate x:Name="EventDataTemplate" x:DataType="local:Event">
+                <Grid Height="180" Width="320" AutomationProperties.Name="{x:Bind name}">
+                    <Image Source="{x:Bind image}" Stretch="UniformToFill"/>
+                    <StackPanel Orientation="Vertical" Height="60" VerticalAlignment="Bottom" Opacity="50" Background="LightBlue" Padding="12">
+                        <TextBlock Text="{x:Bind name}"/>
+                        <!--<TextBlock Text="{x:Bind }" Style="{ThemeResource CaptionTextBlockStyle}" Foreground="{ThemeResource SystemControlPageTextBaseMediumBrush}"/>-->
+                    </StackPanel>
+                </Grid>
+            </DataTemplate>
+        </GridView.ItemTemplate>
+        <GridView.ItemsPanel>
+            <ItemsPanelTemplate>
+                <ItemsWrapGrid MaximumRowsOrColumns="4" Orientation="Horizontal"/>
+            </ItemsPanelTemplate>
+        </GridView.ItemsPanel>
+    </GridView>
+    </Grid>
+
+    <!--<Grid Background="LightGray">
         <GridView Name="EventItemGrid"
                   ItemsSource="{x:Bind Events}"
                   HorizontalAlignment="Stretch"
@@ -58,6 +82,6 @@
 
 
         </GridView>
-    </Grid>
+    </Grid>-->
 
 </Page>

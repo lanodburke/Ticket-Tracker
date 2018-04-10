@@ -36,7 +36,7 @@ namespace TicketTracker
 
         private async void Page_Loaded(object sender, RoutedEventArgs e)
         {
-            foreach (var eventThing in await TicketMasterData.GetEvents("IE"))
+            foreach (var eventThing in await TicketMasterData.GetEvents("US"))
             {
                 Events.Add(eventThing);
             }

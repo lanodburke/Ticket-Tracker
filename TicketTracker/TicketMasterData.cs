@@ -32,6 +32,7 @@ namespace TicketTracker
                 Console.WriteLine(name);
                 BitmapImage image = new BitmapImage(new Uri(data._embedded.events[i].images[1].url));
                 string id = data._embedded.events[i].id;
+
                 Console.WriteLine(id);
 
                 events.Add(new Event { id = id, name = name, image = image });
