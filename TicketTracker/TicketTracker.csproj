@@ -103,6 +103,7 @@
     </Compile>
     <Compile Include="TicketMasterData.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TicketMasterDataEventDetails.cs" />
   </ItemGroup>
   <ItemGroup>
     <AppxManifest Include="Package.appxmanifest">
