@@ -34,10 +34,10 @@
 
     <Grid>
         <Pivot>
-            <PivotItem Name="Details">
+            <PivotItem Header="Details" x:Name="pvt_details">
                 
             </PivotItem>
-            <PivotItem Name="Map">
+            <PivotItem Header="Map" x:Name="pvt_map">
                 
             </PivotItem>
         </Pivot>
