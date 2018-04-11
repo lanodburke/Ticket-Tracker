@@ -72,7 +72,13 @@ namespace TicketTracker
             RootObject1 myDetails = await TicketMasterDataEventDetails.GetEventDetails(this.eventId);
 
             eventImage.Source = myDetails.image;
-            eventName.Text = myDetails.name;
+            if(myDetails.name != null)
+            {
+                eventName.Text = myDetails.name;
+            } else
+            {
+                eventName.Text = "Cannt find event name";
+            }
 
             if(myDetails.eventInfo != null)
             {

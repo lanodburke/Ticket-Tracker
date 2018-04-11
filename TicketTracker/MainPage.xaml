@@ -70,8 +70,8 @@
                         <Grid Height="180" Width="320" AutomationProperties.Name="{x:Bind name}">
                             <Image Source="{x:Bind image}" Stretch="UniformToFill"/>
                             <StackPanel Orientation="Vertical" Height="60" VerticalAlignment="Bottom" Opacity="0.80" Background="Azure" Padding="12">
-                                <TextBlock Text="{x:Bind name}"/>
-                                <TextBlock Text="{x:Bind venueName}" Style="{ThemeResource CaptionTextBlockStyle}" Foreground="{ThemeResource SystemControlPageTextBaseMediumBrush}"/>
+                                <TextBlock TextWrapping="WrapWholeWords"  Text="{x:Bind name}"/>
+                                <TextBlock TextWrapping="WrapWholeWords" Text="{x:Bind venueName}" Style="{ThemeResource CaptionTextBlockStyle}" Foreground="{ThemeResource SystemControlPageTextBaseMediumBrush}"/>
                             </StackPanel>
                         </Grid>
                     </DataTemplate>

@@ -21,11 +21,11 @@
                         <ColumnDefinition Width="*"></ColumnDefinition>
                         <ColumnDefinition Width="*"></ColumnDefinition>
                     </Grid.ColumnDefinitions>
-                    <StackPanel Grid.Row="0" Grid.ColumnSpan="2">
-                        <Image x:Name="eventImage" Stretch="Uniform"></Image>
+                    <StackPanel Grid.Row="0" Grid.Column="0">
+                        <Image x:Name="eventImage" Stretch="Fill"></Image>
                     </StackPanel>
-                    <StackPanel Background="Azure"  Grid.Row="1" Grid.Column="0" Padding="20">
-                        <TextBlock x:Name="eventName" TextWrapping="WrapWholeWords"></TextBlock>
+                    <StackPanel Background="Azure"  Grid.Row="0" Grid.Column="1" Padding="20">
+                        <TextBlock FontSize="34" FontFamily="Arial" FontWeight="Bold" x:Name="eventName" TextWrapping="WrapWholeWords"></TextBlock>
                         <TextBlock x:Name="venueName" TextWrapping="WrapWholeWords"></TextBlock>
                     </StackPanel>
                     <StackPanel Background="LightBlue"  Grid.Row="1" Grid.Column="1" Padding="20">
