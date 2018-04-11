@@ -32,8 +32,12 @@
         </GridView>
 
     </Grid>-->
-
+    
     <Grid>
+        <CommandBar>
+            <AppBarButton VerticalAlignment="Top" HorizontalAlignment="Left" 
+Style="{StaticResource NavigationBackButtonNormalStyle}" x:Name="BackButton" Click="Back_Click"/>
+        </CommandBar>
         <Pivot>
             <PivotItem Header="Details" x:Name="pvt_details">
                 <Grid>
