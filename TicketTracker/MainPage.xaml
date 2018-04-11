@@ -37,12 +37,10 @@
         </Grid.RowDefinitions>
         <StackPanel Grid.Row="0" Padding="15">
                 <ComboBox x:Name="CountriesCombo" Header="Select Country Code" Height="60" Width="auto"
-                      ItemsSource="{Binding}"
-                         IsEnabled="True"
-                          SelectionChanged="CountriesCombo_SelectionChanged">
+                      ItemsSource="{Binding}">
                     <ComboBox.ItemTemplate>
                         <DataTemplate>
-                            <ComboBoxItem IsSelected="True" IsTapEnabled="False" Tag="{Binding Item1}" Content="{Binding Item2}"></ComboBoxItem>
+                            <TextBlock Tapped="CountryBox_Tapped" x:Name="CountryBox" Tag="{Binding Item1}" Text="{Binding Item2}"/>
                         </DataTemplate>
                     </ComboBox.ItemTemplate>
                 </ComboBox>

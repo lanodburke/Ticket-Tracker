@@ -67,23 +67,15 @@ namespace TicketTracker
             Frame.Navigate(typeof(EventDetailPage), myEvent.id);            
         }
 
-        private async void CountriesCombo_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private async void CountryBox_Tapped(object sender, TappedRoutedEventArgs e)
         {
-            if(CountriesCombo.SelectedItem != null)
-            {
-                string countryCode = "IE";
-                if (CountriesCombo.Tag != null) // combo tag is currently null
-                {
-                    countryCode = (string)CountriesCombo.Tag;
-                } 
-                
-                Events.Clear();
-                foreach (var eventThing in await TicketMasterData.GetEvents(countryCode))
-                {
-                    Events.Add(eventThing);
-                }
-            }
+            var countryCode = ((TextBlock)sender).Tag;
 
+            Events.Clear();
+            foreach (var eventThing in await TicketMasterData.GetEvents((string)countryCode))
+            {
+                Events.Add(eventThing);
+            }
         }
     }
 }
