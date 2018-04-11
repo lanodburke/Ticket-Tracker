@@ -39,7 +39,7 @@ namespace TicketTracker
             loc.longitude = longitude;
             loc.latitude = latitude;
 
-            rootObject1 = new RootObject1 { name = name, image = image, eventInfo = eventInfo, address = address, longitude = longitude, latitude = latitude };
+            rootObject1 = new RootObject1 { name = name, image = image, eventInfo = eventInfo, address = address, longitude = longitude, latitude = latitude, venueName = venuName };
 
             return rootObject1;
         }

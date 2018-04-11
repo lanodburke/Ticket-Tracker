@@ -35,6 +35,27 @@
     <Grid>
         <Pivot>
             <PivotItem Header="Details" x:Name="pvt_details">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"></RowDefinition>
+                        <RowDefinition Height="*"></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <StackPanel Grid.Row="0" Grid.ColumnSpan="2">
+                        <Image x:Name="eventImage" Stretch="Uniform"></Image>
+                    </StackPanel>
+                    <StackPanel Background="Azure"  Grid.Row="1" Grid.Column="0" Padding="20">
+                        <TextBlock x:Name="eventName" TextWrapping="WrapWholeWords"></TextBlock>
+                        <TextBlock x:Name="venueName" TextWrapping="WrapWholeWords"></TextBlock>
+                    </StackPanel>
+                    <StackPanel Background="LightBlue"  Grid.Row="1" Grid.Column="1" Padding="20">
+                        <TextBlock x:Name="eventInfo" TextWrapping="WrapWholeWords"></TextBlock>
+                    </StackPanel>
+                </Grid>
+                
                 
             </PivotItem>
             <PivotItem Header="Map" x:Name="pvt_map">

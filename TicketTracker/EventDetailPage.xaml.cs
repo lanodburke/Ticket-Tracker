@@ -38,8 +38,11 @@ namespace TicketTracker
         private async void Page_Loaded(object sender, RoutedEventArgs e)
         {
             RootObject1 myDetails = await TicketMasterDataEventDetails.GetEventDetails(this.eventId);
-            
-            
+
+            eventImage.Source = myDetails.image;
+            eventName.Text = myDetails.name;
+            eventInfo.Text = myDetails.eventInfo;
+            venueName.Text = myDetails.venueName;
         }
     }
 }
