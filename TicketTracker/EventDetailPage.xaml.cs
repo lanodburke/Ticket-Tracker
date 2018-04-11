@@ -73,8 +73,24 @@ namespace TicketTracker
 
             eventImage.Source = myDetails.image;
             eventName.Text = myDetails.name;
-            eventInfo.Text = myDetails.eventInfo;
-            venueName.Text = myDetails.venueName;
+
+            if(myDetails.eventInfo != null)
+            {
+                eventInfo.Text = myDetails.eventInfo;
+            } else
+            {
+                eventInfo.Text = "No info has been given for the event!";
+            }
+               
+            if(myDetails.venueName != null)
+            {
+                venueName.Text = myDetails.venueName;
+            } else
+            {
+                venueName.Text = "No venue has been given for this event at this current time!";
+            }
+
+
 
             AddSpaceNeedleIcon(myDetails.longitude, myDetails.latitude, myDetails.venueName);
         }

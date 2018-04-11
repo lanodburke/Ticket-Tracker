@@ -97,8 +97,10 @@ UA (Ukraine)
 AE (United Arab Emirates)
 UY (Uruguay)
 VE (Venezuela)
+
+Classifications: Music, Sports, Film, Art & Theatre
      */
-        public async static Task<List<Event>> GetEvents(string countryCode)
+        public async static Task<List<Event>> GetEventsByCountryId(string countryCode)
         {
             var http = new HttpClient();
             var respone = await http.GetAsync("https://app.ticketmaster.com/discovery/v2/events.json?apikey=5AdNWJcac0sUjTXt0rQY5lnGJio8OvvN&countryCode=" + countryCode);
@@ -111,7 +113,33 @@ VE (Venezuela)
 
             var events = new List<Event>();
 
-            
+            for (int i = 0; i < data._embedded.events.Count(); i++)
+            {
+                string name = data._embedded.events[i].name;
+                Console.WriteLine(name);
+                BitmapImage image = new BitmapImage(new Uri(data._embedded.events[i].images[1].url));
+                string id = data._embedded.events[i].id;
+                string venueName = data._embedded.events[i]._embedded.venues[0].name;
+                Console.WriteLine(id);
+
+                events.Add(new Event { id = id, name = name, image = image,
+                    venueName = venueName});
+            }
+            return events;
+        }
+
+        public async static Task<List<Event>> GetEventsByClassifcation(string classifcation)
+        {
+            var http = new HttpClient();
+            var respone = await http.GetAsync("https://app.ticketmaster.com/discovery/v2/events.json?apikey=5AdNWJcac0sUjTXt0rQY5lnGJio8OvvN&classificationName" + classifcation);
+            var result = await respone.Content.ReadAsStringAsync();
+            var serializer = new DataContractJsonSerializer(typeof(RootObject));
+
+            var ms = new System.IO.MemoryStream(Encoding.UTF8.GetBytes(result));
+
+            var data = (RootObject)serializer.ReadObject(ms);
+
+            var events = new List<Event>();
 
             for (int i = 0; i < data._embedded.events.Count(); i++)
             {
@@ -122,12 +150,18 @@ VE (Venezuela)
                 string venueName = data._embedded.events[i]._embedded.venues[0].name;
                 Console.WriteLine(id);
 
-                events.Add(new Event { id = id, name = name, image = image, venueName = venueName});
+                events.Add(new Event
+                {
+                    id = id,
+                    name = name,
+                    image = image,
+                    venueName = venueName
+                });
             }
-
             return events;
         }
     }
+}
 
     [DataContract]
     public class Image

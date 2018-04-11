@@ -28,18 +28,26 @@ namespace TicketTracker
             string name = data.name;
             BitmapImage image = new BitmapImage(new Uri(data.images[4].url));
             string eventInfo = data.pleaseNote;
-            Location2 loc = new Location2();
 
-            GeneralInfo venueInfo = data._embedded.venues[0].generalInfo;
             string venuName = data._embedded.venues[0].name;
             Address2 address = data._embedded.venues[0].address;
             string longitude = data._embedded.venues[0].location.longitude;
             string latitude = data._embedded.venues[0].location.latitude;
 
-            loc.longitude = longitude;
-            loc.latitude = latitude;
+            var attractions = new List<Attraction4>();
 
-            rootObject1 = new RootObject1 { name = name, image = image, eventInfo = eventInfo, address = address, longitude = longitude, latitude = latitude, venueName = venuName };
+            for(int i = 0; i < data._embedded.attractions.Count(); i++)
+            {
+                string attractionName = data._embedded.attractions[i].name;
+                string attractionUrl = data._embedded.attractions[i].url;
+
+                attractions.Add(new Attraction4 { name = attractionName, url = attractionUrl });
+            }
+
+            rootObject1 = new RootObject1 { name = name, image = image,
+                eventInfo = eventInfo, address = address,
+                longitude = longitude, latitude = latitude,
+                venueName = venuName, attraction4 = attractions };
 
             return rootObject1;
         }
@@ -553,7 +561,7 @@ namespace TicketTracker
         [DataMember]
         public List<Venue4> venues { get; set; }
         [DataMember]
-        public List<Attraction3> attractions { get; set; }
+        public List<Attraction4> attractions { get; set; }
     }
 
     [DataContract]
@@ -567,6 +575,7 @@ namespace TicketTracker
         public GeneralInfo genInfo { get; set; }
         public Location2 location { get; set; }
         public BitmapImage image { get; set; }
+        public List<Attraction4> attraction4 { get; set; }
         [DataMember]
         public string name { get; set; }
         [DataMember]
