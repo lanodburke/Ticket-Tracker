@@ -5,6 +5,7 @@
     xmlns:local="using:TicketTracker"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:Maps="using:Windows.UI.Xaml.Controls.Maps"
     Loaded="Page_Loaded"
     mc:Ignorable="d">
 
@@ -59,7 +60,13 @@
                 
             </PivotItem>
             <PivotItem Header="Map" x:Name="pvt_map">
-                
+                <Maps:MapControl 
+            x:Name="Map" 
+            MapServiceToken="-uBbqVSvn8bgXNWVYZdYcg" 
+            ZoomInteractionMode="GestureAndControl" 
+            LandmarksVisible="True" 
+            IsRightTapEnabled="true" 
+           />
             </PivotItem>
         </Pivot>
     </Grid>
