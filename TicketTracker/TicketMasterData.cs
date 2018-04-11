@@ -103,7 +103,7 @@ Classifications: Music, Sports, Film, Art & Theatre
         public async static Task<List<Event>> GetEventsByCountryId(string countryCode)
         {
             var http = new HttpClient();
-            var respone = await http.GetAsync("https://app.ticketmaster.com/discovery/v2/events.json?apikey=5AdNWJcac0sUjTXt0rQY5lnGJio8OvvN&countryCode=" + countryCode);
+            var respone = await http.GetAsync("https://app.ticketmaster.com/discovery/v2/events.json?apikey=5AdNWJcac0sUjTXt0rQY5lnGJio8OvvN&size=200&countryCode=" + countryCode);
             var result = await respone.Content.ReadAsStringAsync();
             var serializer = new DataContractJsonSerializer(typeof(RootObject));
 
@@ -131,7 +131,7 @@ Classifications: Music, Sports, Film, Art & Theatre
         public async static Task<List<Event>> GetEventsByClassifcation(string classifcation)
         {
             var http = new HttpClient();
-            var respone = await http.GetAsync("https://app.ticketmaster.com/discovery/v2/events.json?apikey=5AdNWJcac0sUjTXt0rQY5lnGJio8OvvN&classificationName" + classifcation);
+            var respone = await http.GetAsync("https://app.ticketmaster.com/discovery/v2/events.json?apikey=5AdNWJcac0sUjTXt0rQY5lnGJio8OvvN&size=200&classificationName" + classifcation);
             var result = await respone.Content.ReadAsStringAsync();
             var serializer = new DataContractJsonSerializer(typeof(RootObject));
 

@@ -41,8 +41,6 @@ namespace TicketTracker
             Classifications.Add("Music");
             Classifications.Add("Arts & Theatre");
             Classifications.Add("Film");
-
-            //DataContext = Countries;
         }
 
         public event PropertyChangedEventHandler PropertyChanged
@@ -62,7 +60,7 @@ namespace TicketTracker
 
         private async void Page_Loaded(object sender, RoutedEventArgs e)
         {
-            foreach (var eventThing in await TicketMasterData.GetEventsByCountryId("US"))
+            foreach (var eventThing in await TicketMasterData.GetEventsByCountryId("IE"))
             {
                 Events.Add(eventThing);
             }

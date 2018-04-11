@@ -35,7 +35,11 @@
             <RowDefinition Height="100"/>
             <RowDefinition Height="auto"/>
         </Grid.RowDefinitions>
-        <StackPanel Grid.Row="0" Padding="15">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+        <StackPanel Grid.Row="0" Grid.Column="0" Padding="15">
                 <ComboBox x:Name="CountriesCombo" Header="Select Country Code" Height="60" Width="auto"
                       ItemsSource="{x:Bind Countries}">
                     <ComboBox.ItemTemplate>
@@ -45,7 +49,7 @@
                     </ComboBox.ItemTemplate>
                 </ComboBox>
             </StackPanel>
-            <StackPanel Grid.Row="0" Grid.Column="10" Padding="15">
+            <StackPanel Grid.Row="0" Grid.Column="1" Padding="15">
                 <ComboBox x:Name="ClassificationsCombo" Header="Select Event Type" Height="60" Width="auto"
                       ItemsSource="{x:Bind Classifications}">
                     <ComboBox.ItemTemplate>
@@ -60,7 +64,7 @@
               IsTapEnabled="True"
               IsItemClickEnabled="True"
               ItemClick="Goto_Event_Details_Page"
-              Grid.Row="1">
+              Grid.Row="1" Grid.ColumnSpan="2">
                 <GridView.ItemTemplate>
                     <DataTemplate x:Name="EventDataTemplate" x:DataType="local:Event">
                         <Grid Height="180" Width="320" AutomationProperties.Name="{x:Bind name}">
