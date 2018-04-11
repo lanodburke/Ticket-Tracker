@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
@@ -27,6 +28,7 @@ namespace TicketTracker
     public sealed partial class MainPage : Windows.UI.Xaml.Controls.Page, INotifyPropertyChanged
     {
         private ObservableCollection<Tuple<string,string>> Countries = new ObservableCollection<Tuple<string, string>>();
+        private ObservableCollection<string> Classifications = new ObservableCollection<string>();
 
         public MainPage()
         {
@@ -35,7 +37,12 @@ namespace TicketTracker
             Countries.Add(new Tuple<string, string>("IE", "Ireland"));
             Countries.Add(new Tuple<string, string>("CA", "Canada"));
 
-            DataContext = Countries;
+            Classifications.Add("Sports");
+            Classifications.Add("Music");
+            Classifications.Add("Arts & Theatre");
+            Classifications.Add("Film");
+
+            //DataContext = Countries;
         }
 
         public event PropertyChangedEventHandler PropertyChanged
@@ -55,7 +62,7 @@ namespace TicketTracker
 
         private async void Page_Loaded(object sender, RoutedEventArgs e)
         {
-            foreach (var eventThing in await TicketMasterData.GetEvents("US"))
+            foreach (var eventThing in await TicketMasterData.GetEventsByCountryId("US"))
             {
                 Events.Add(eventThing);
             }
@@ -72,7 +79,19 @@ namespace TicketTracker
             var countryCode = ((TextBlock)sender).Tag;
 
             Events.Clear();
-            foreach (var eventThing in await TicketMasterData.GetEvents((string)countryCode))
+            foreach (var eventThing in await TicketMasterData.GetEventsByCountryId((string)countryCode))
+            {
+                Events.Add(eventThing);
+            }
+        }
+
+        private async void ClassificationBox_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            var classificationName = ((TextBlock)sender).Text;
+            Debug.WriteLine(classificationName);
+
+            Events.Clear();
+            foreach (var eventThing in await TicketMasterData.GetEventsByClassifcation(classificationName))
             {
                 Events.Add(eventThing);
             }

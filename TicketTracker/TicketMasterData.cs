@@ -160,7 +160,6 @@ Classifications: Music, Sports, Film, Art & Theatre
             }
             return events;
         }
-    }
 }
 
     [DataContract]

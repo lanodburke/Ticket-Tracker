@@ -37,10 +37,20 @@
         </Grid.RowDefinitions>
         <StackPanel Grid.Row="0" Padding="15">
                 <ComboBox x:Name="CountriesCombo" Header="Select Country Code" Height="60" Width="auto"
-                      ItemsSource="{Binding}">
+                      ItemsSource="{x:Bind Countries}">
                     <ComboBox.ItemTemplate>
                         <DataTemplate>
                             <TextBlock Tapped="CountryBox_Tapped" x:Name="CountryBox" Tag="{Binding Item1}" Text="{Binding Item2}"/>
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
+                </ComboBox>
+            </StackPanel>
+            <StackPanel Grid.Row="0" Grid.Column="10" Padding="15">
+                <ComboBox x:Name="ClassificationsCombo" Header="Select Event Type" Height="60" Width="auto"
+                      ItemsSource="{x:Bind Classifications}">
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Tapped="ClassificationBox_Tapped" x:Name="ClassifcationBox" Text="{Binding}"/>
                         </DataTemplate>
                     </ComboBox.ItemTemplate>
                 </ComboBox>
