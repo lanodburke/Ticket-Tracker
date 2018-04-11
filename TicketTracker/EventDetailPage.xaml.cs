@@ -4,10 +4,12 @@ using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using Windows.Devices.Geolocation;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Controls.Maps;
 using Windows.UI.Xaml.Controls.Primitives;
 using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
@@ -35,6 +37,35 @@ namespace TicketTracker
             this.eventId = (string)e.Parameter;
         }
 
+        public void AddSpaceNeedleIcon(string longitude, string latitude, string venueName)
+        {
+            var MyLandmarks = new List<MapElement>();
+
+            BasicGeoposition snPosition = new BasicGeoposition { Latitude = Convert.ToDouble(latitude), Longitude = Convert.ToDouble(longitude) };
+            Geopoint snPoint = new Geopoint(snPosition);
+
+            var spaceNeedleIcon = new MapIcon
+            {
+                Location = snPoint,
+                NormalizedAnchorPoint = new Point(0.5, 1.0),
+                ZIndex = 0,
+                Title = venueName
+            };
+
+            MyLandmarks.Add(spaceNeedleIcon);
+
+            var LandmarksLayer = new MapElementsLayer
+            {
+                ZIndex = 1,
+                MapElements = MyLandmarks
+            };
+
+            myMap.Layers.Add(LandmarksLayer);
+
+            myMap.Center = snPoint;
+            myMap.ZoomLevel = 14;
+        }
+
         private async void Page_Loaded(object sender, RoutedEventArgs e)
         {
             RootObject1 myDetails = await TicketMasterDataEventDetails.GetEventDetails(this.eventId);
@@ -43,6 +74,8 @@ namespace TicketTracker
             eventName.Text = myDetails.name;
             eventInfo.Text = myDetails.eventInfo;
             venueName.Text = myDetails.venueName;
+
+            AddSpaceNeedleIcon(myDetails.longitude, myDetails.latitude, myDetails.venueName);
         }
     }
 }

@@ -61,7 +61,7 @@
             </PivotItem>
             <PivotItem Header="Map" x:Name="pvt_map">
                 <Maps:MapControl 
-            x:Name="Map" 
+            x:Name="myMap" 
             MapServiceToken="-uBbqVSvn8bgXNWVYZdYcg" 
             ZoomInteractionMode="GestureAndControl" 
             LandmarksVisible="True" 
