@@ -81,70 +81,77 @@ namespace TicketTracker
 
         private async void Page_Loaded(object sender, RoutedEventArgs e)
         {
-                try
+            try
+            {
+                RootObject1 myDetails = await TicketMasterDataEventDetails.GetEventDetails(this.eventId);
+                if (myDetails != null)
                 {
-                        RootObject1 myDetails = await TicketMasterDataEventDetails.GetEventDetails(this.eventId);
-                        if (myDetails != null)
-                        {
-                            eventImage.Source = myDetails.image;
-                            if (myDetails.name != null)
-                            {
-                                eventName.Text = myDetails.name;
-                            }
-                            else
-                            {
-                                eventName.Text = "Cannt find event name";
-                            }
+                    eventImage.Source = myDetails.image;
+                    if (myDetails.name != null)
+                    {
+                        eventName.Text = myDetails.name;
+                    }
+                    else
+                    {
+                        eventName.Text = "Cannt find event name";
+                    }
 
-                            if (myDetails.eventInfo != null)
-                            {
-                                eventInfo.Text = myDetails.eventInfo;
-                            }
-                            else
-                            {
-                                eventInfo.Text = "No info has been given for the event!";
-                            }
-                            if (myDetails.info != null)
-                            {
-                                eventNote.Text = myDetails.info;
-                            }
-                            else
-                            {
-                                eventNote.Text = "No info has been given for the event!";
-                            }
+                    if (myDetails.eventInfo != null)
+                    {
+                        eventInfo.Text = myDetails.eventInfo;
+                    }
+                    else
+                    {
+                        eventInfo.Text = "No info has been given for the event!";
+                    }
+                    if (myDetails.info != null)
+                    {
+                        eventNote.Text = myDetails.info;
+                    }
+                    else
+                    {
+                        eventNote.Text = "No info has been given for the event!";
+                    }
 
-                            if (myDetails.venueName != null)
-                            {
-                                venueName.Text = myDetails.venueName;
-                            }
-                            else
-                            {
+                    if (myDetails.venueName != null)
+                    {
+                        venueName.Text = myDetails.venueName;
+                    }
+                    else
+                    {
 
                         venueName.Text = "No venue has been given for this event at this current time!";
-                            }
-                            if (myDetails.url != null)
-                            {
-                                urlInfo.Text = "To buy tickets, click the following link.";
-                                url.Content = "www.ticketmaster.com/event/" + myDetails.id;
-                                url.NavigateUri = new Uri(myDetails.url);
-                            }
-                            if (myDetails.date != null)
-                            {
-                                //eventDate.Text = String.Format myDetails.date;
-                            }
+                    }
+                    if (myDetails.url != null)
+                    {
+                        urlInfo.Text = "To buy tickets, click the following link.";
+                        url.Content = "www.ticketmaster.com/event/" + myDetails.id;
+                        url.NavigateUri = new Uri(myDetails.url);
+                    }
+                    if (myDetails.date != null)
+                    {
+                        eventDate.Text = string.Format("{0:f}", myDetails.date);
+                    }
+                    else
+                    {
+                        eventDate.Text = "Cannot display date.";
+                    }
 
+                    if (myDetails.longitude == null || myDetails.latitude == null || myDetails.venueName == null)
+                    {
+                        AddSpaceNeedleIcon(myDetails.longitude, myDetails.latitude, myDetails.venueName);
+                    }
 
-                            AddSpaceNeedleIcon(myDetails.longitude, myDetails.latitude, myDetails.venueName);
-                        }
+                }
 
             }
             catch
-                {
+            {
                 DisplayNoWifiDialog();
-                }
-                
-            
-            
+            }
+
+
+
         }
     }
 }

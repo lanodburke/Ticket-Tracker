@@ -30,8 +30,8 @@ namespace TicketTracker
 
             for (int i = 0; i < 10; i++)
             {
-                if (data.images[i].height.Equals(1152)
-                    && data.images[i].width.Equals(2048))
+                if (data.images[i].height.Equals(576)
+                    && data.images[i].width.Equals(1024))
                 {
                     image = new BitmapImage(new Uri(data.images[i].url));
                     i = 10;

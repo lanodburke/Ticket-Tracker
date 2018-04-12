@@ -26,9 +26,9 @@
                     </StackPanel>
                     <StackPanel BorderBrush="Gainsboro" BorderThickness="2" Background="WhiteSmoke"  Grid.Row="0" Grid.Column="1" Padding="20">
                         <TextBlock FontSize="28" FontFamily="Arial" FontWeight="Bold" x:Name="eventName" TextWrapping="WrapWholeWords"></TextBlock>
-                        <TextBlock FontSize="18" FontFamily="Arial" FontWeight="Light" x:Name="venueName" TextWrapping="WrapWholeWords"></TextBlock>
-                        <TextBlock x:Name="eventDate"></TextBlock>
-                        <TextBlock x:Name="urlInfo"></TextBlock>
+                        <TextBlock FontSize="24" FontFamily="Arial" FontWeight="Light" x:Name="venueName" TextWrapping="WrapWholeWords"></TextBlock>
+                        <TextBlock Margin="0,10,0,0" FontSize="18" FontFamily="Arial" FontWeight="Thin"  x:Name="eventDate"></TextBlock>
+                        <TextBlock Margin="0,20,0,0" x:Name="urlInfo"></TextBlock>
                         <HyperlinkButton x:Name="url"></HyperlinkButton>
                     </StackPanel>
                     <StackPanel BorderBrush="Gainsboro" BorderThickness="2" Background="WhiteSmoke"  Grid.Row="1" Grid.Column="0" Padding="20">
