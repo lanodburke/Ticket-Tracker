@@ -49,8 +49,6 @@ namespace TicketTracker
             Countries.Add(new Tuple<string, string>("BE", "Belgium"));
             Countries.Add(new Tuple<string, string>("BE", "Belgium"));
 
-
-
             Classifications.Add("Sports");
             Classifications.Add("Music");
             Classifications.Add("Arts & Theatre");
@@ -74,16 +72,45 @@ namespace TicketTracker
 
         private async void Page_Loaded(object sender, RoutedEventArgs e)
         {
-            foreach (var eventThing in await TicketMasterData.GetEventsByCountryId("IE"))
+            try
             {
-                Events.Add(eventThing);
+                foreach (var eventThing in await TicketMasterData.GetEventsByCountryId("IE"))
+                {
+                    Events.Add(eventThing);
+                }
+            } catch
+            {
+                DisplayNoWifiDialog();
+                for(int i = 0; i < 100; i++)
+                {
+                    Events.Add(new Event { name = "Event Name", venueName = "Venue Name", image = null, id = "0" });
+                }
             }
+
         }
 
         private void Goto_Event_Details_Page(object sender, ItemClickEventArgs e)
         {
             var myEvent = e.ClickedItem as Event;
-            Frame.Navigate(typeof(EventDetailPage), myEvent.id);            
+            if(myEvent.id.Equals("0"))
+            {
+                DisplayNoWifiDialog();
+            } else
+            {
+                Frame.Navigate(typeof(EventDetailPage), myEvent.id);
+            }     
+        }
+
+        private async void DisplayNoWifiDialog()
+        {
+            ContentDialog noWifiDialog = new ContentDialog
+            {
+                Title = "Cannot connect to database",
+                Content = "Check your connection and try again.",
+                CloseButtonText = "Ok"
+            };
+
+            ContentDialogResult result = await noWifiDialog.ShowAsync();
         }
 
         private async void CountryBox_Tapped(object sender, TappedRoutedEventArgs e)
@@ -91,10 +118,22 @@ namespace TicketTracker
             var countryCode = ((TextBlock)sender).Tag;
 
             Events.Clear();
-            foreach (var eventThing in await TicketMasterData.GetEventsByCountryId((string)countryCode))
+
+            try
             {
-                Events.Add(eventThing);
+                foreach (var eventThing in await TicketMasterData.GetEventsByCountryId((string)countryCode))
+                {
+                    Events.Add(eventThing);
+                }
+            } catch
+            {
+                DisplayNoWifiDialog();
+                for (int i = 0; i < 100; i++)
+                {
+                    Events.Add(new Event { name = "Event Name", venueName = "Venue Name", image = null, id = "0" });
+                }
             }
+            
         }
 
         private async void ClassificationBox_Tapped(object sender, TappedRoutedEventArgs e)
@@ -103,10 +142,22 @@ namespace TicketTracker
             Debug.WriteLine(classificationName);
 
             Events.Clear();
-            foreach (var eventThing in await TicketMasterData.GetEventsByClassifcation(classificationName))
+
+            try
             {
-                Events.Add(eventThing);
+                foreach (var eventThing in await TicketMasterData.GetEventsByClassifcation(classificationName))
+                {
+                    Events.Add(eventThing);
+                }
+            } catch
+            {
+                DisplayNoWifiDialog();
+                for (int i = 0; i < 100; i++)
+                {
+                    Events.Add(new Event { name = "Event Name", venueName = "Venue Name", image = null, id = "0" });
+                }
             }
+            
         }
     }
 }
