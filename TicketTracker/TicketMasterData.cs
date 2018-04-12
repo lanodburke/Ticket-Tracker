@@ -15,17 +15,6 @@ namespace TicketTracker
     public class TicketMasterData
     {
         /*
-US (United States Of America)
-AD (Andorra)
-AI (Anguilla)
-AR (Argentina)
-AU (Australia)
-AT (Austria)
-AZ (Azerbaijan)
-BS (Bahamas)
-BH (Bahrain)
-BB (Barbados)
-BE (Belgium)
 BM (Bermuda)
 BR (Brazil)
 BG (Bulgaria)
@@ -125,9 +114,6 @@ Classifications: Music, Sports, Film, Art & Theatre
                     if (data._embedded.events[i].images[j].height.Equals(576)
                         && data._embedded.events[i].images[j].width.Equals(1024))
                     {
-                        Debug.WriteLine("URL" + data._embedded.events[i].images[j].url + " Width=" + 
-                           data._embedded.events[i].images[j].width + " Height=" + data._embedded.events[i].images[j].height
-                           + " Ratio=" + data._embedded.events[i].images[j].ratio);
                         image = new BitmapImage(new Uri(data._embedded.events[i].images[j].url));
                         j = 10;
                     } 
@@ -160,7 +146,18 @@ Classifications: Music, Sports, Film, Art & Theatre
             {
                 string name = data._embedded.events[i].name;
                 Console.WriteLine(name);
-                BitmapImage image = new BitmapImage(new Uri(data._embedded.events[i].images[1].url));
+                BitmapImage image = null;
+
+                // 10 images for each event
+                for (int j = 0; j < 10; j++)
+                {
+                    if (data._embedded.events[i].images[j].height.Equals(576)
+                        && data._embedded.events[i].images[j].width.Equals(1024))
+                    {
+                        image = new BitmapImage(new Uri(data._embedded.events[i].images[j].url));
+                        j = 10;
+                    }
+                }
                 string id = data._embedded.events[i].id;
                 string venueName = data._embedded.events[i]._embedded.venues[0].name;
                 Console.WriteLine(id);

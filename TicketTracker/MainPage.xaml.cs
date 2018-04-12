@@ -36,6 +36,20 @@ namespace TicketTracker
             Countries.Add(new Tuple<string, string>("US", "United States"));
             Countries.Add(new Tuple<string, string>("IE", "Ireland"));
             Countries.Add(new Tuple<string, string>("CA", "Canada"));
+            Countries.Add(new Tuple<string, string>("AD", "Andorra"));
+            Countries.Add(new Tuple<string, string>("AI", "Anguilla"));
+            Countries.Add(new Tuple<string, string>("AR", "Argentina"));
+            Countries.Add(new Tuple<string, string>("AU", "Australia"));
+            Countries.Add(new Tuple<string, string>("AT", "Austria"));
+            Countries.Add(new Tuple<string, string>("AZ", "Azerbaijan"));
+            Countries.Add(new Tuple<string, string>("AZ", "Azerbaijan"));
+            Countries.Add(new Tuple<string, string>("BS", "Bahamas"));
+            Countries.Add(new Tuple<string, string>("BH", "Bahrain"));
+            Countries.Add(new Tuple<string, string>("BB", "Barbados"));
+            Countries.Add(new Tuple<string, string>("BE", "Belgium"));
+            Countries.Add(new Tuple<string, string>("BE", "Belgium"));
+
+
 
             Classifications.Add("Sports");
             Classifications.Add("Music");

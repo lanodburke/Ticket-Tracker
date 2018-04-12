@@ -92,6 +92,14 @@ namespace TicketTracker
                     {
                         eventInfo.Text = "No info has been given for the event!";
                     }
+                    if (myDetails.info != null)
+                    {
+                        eventNote.Text = myDetails.info;
+                    }
+                    else
+                    {
+                        eventNote.Text = "No info has been given for the event!";
+                    }
 
                     if (myDetails.venueName != null)
                     {
@@ -100,6 +108,12 @@ namespace TicketTracker
                     else
                     {
                         venueName.Text = "No venue has been given for this event at this current time!";
+                    }
+                    if(myDetails.url != null)
+                    {
+                        urlInfo.Text = "To buy tickets, click the following link.";
+                        url.Content = "www.ticketmaster.com/" + myDetails.id;
+                        url.NavigateUri = new Uri(myDetails.url);
                     }
 
 

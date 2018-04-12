@@ -26,8 +26,21 @@ namespace TicketTracker
             RootObject1 rootObject1;
 
             string name = data.name;
-            BitmapImage image = new BitmapImage(new Uri(data.images[4].url));
-            string eventInfo = data.pleaseNote;
+            BitmapImage image = null;
+
+            for (int i = 0; i < 10; i++)
+            {
+                if (data.images[i].height.Equals(1152)
+                    && data.images[i].width.Equals(2048))
+                {
+                    image = new BitmapImage(new Uri(data.images[i].url));
+                    i = 10;
+                }
+            }
+
+            string eventInfo = data.info;
+            string note = data.pleaseNote;
+            string url = data.url;
 
             string venuName = data._embedded.venues[0].name;
             Address2 address = data._embedded.venues[0].address;
@@ -47,7 +60,7 @@ namespace TicketTracker
             rootObject1 = new RootObject1 { name = name, image = image,
                 eventInfo = eventInfo, address = address,
                 longitude = longitude, latitude = latitude,
-                venueName = venuName, attraction4 = attractions };
+                venueName = venuName, attraction4 = attractions, info = note, url = url };
 
             return rootObject1;
         }
@@ -576,6 +589,8 @@ namespace TicketTracker
         public Location2 location { get; set; }
         public BitmapImage image { get; set; }
         public List<Attraction4> attraction4 { get; set; }
+        [DataMember]
+        public string info { get; set; }
         [DataMember]
         public string name { get; set; }
         [DataMember]
