@@ -43,7 +43,7 @@
             <PivotItem Header="Map" x:Name="pvt_map">
                 <Maps:MapControl 
             x:Name="myMap" 
-            MapServiceToken="uBbqVSvn8bgXNWVYZdYcg" 
+            MapServiceToken="GdpYviTsKxdyNprqDQcy~-wLjhkW1Zm3tptlvn031JA~Avf1OxwtWkphBTvqa82OsxB4QDMbwSUwECZRaY5rCLnHCprnqoEVZj9tqm8Ad6Jw" 
             ZoomInteractionMode="GestureAndControl" 
             LandmarksVisible="True" 
             IsRightTapEnabled="true" 

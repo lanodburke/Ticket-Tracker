@@ -27,7 +27,7 @@ namespace TicketTracker
     /// </summary>
     public sealed partial class MainPage : Windows.UI.Xaml.Controls.Page, INotifyPropertyChanged
     {
-        private ObservableCollection<Tuple<string,string>> Countries = new ObservableCollection<Tuple<string, string>>();
+        private ObservableCollection<Tuple<string, string>> Countries = new ObservableCollection<Tuple<string, string>>();
         private ObservableCollection<string> Classifications = new ObservableCollection<string>();
 
         public MainPage()
@@ -36,18 +36,22 @@ namespace TicketTracker
             Countries.Add(new Tuple<string, string>("US", "United States"));
             Countries.Add(new Tuple<string, string>("IE", "Ireland"));
             Countries.Add(new Tuple<string, string>("CA", "Canada"));
-            Countries.Add(new Tuple<string, string>("AD", "Andorra"));
-            Countries.Add(new Tuple<string, string>("AI", "Anguilla"));
-            Countries.Add(new Tuple<string, string>("AR", "Argentina"));
             Countries.Add(new Tuple<string, string>("AU", "Australia"));
             Countries.Add(new Tuple<string, string>("AT", "Austria"));
-            Countries.Add(new Tuple<string, string>("AZ", "Azerbaijan"));
-            Countries.Add(new Tuple<string, string>("AZ", "Azerbaijan"));
-            Countries.Add(new Tuple<string, string>("BS", "Bahamas"));
-            Countries.Add(new Tuple<string, string>("BH", "Bahrain"));
-            Countries.Add(new Tuple<string, string>("BB", "Barbados"));
             Countries.Add(new Tuple<string, string>("BE", "Belgium"));
-            Countries.Add(new Tuple<string, string>("BE", "Belgium"));
+            Countries.Add(new Tuple<string, string>("DK", "Denmark"));
+            Countries.Add(new Tuple<string, string>("FR", "France"));
+            Countries.Add(new Tuple<string, string>("GB", "Great Britain"));
+            Countries.Add(new Tuple<string, string>("LU", "Luxembourg"));
+            Countries.Add(new Tuple<string, string>("MX", "Mexico"));
+            Countries.Add(new Tuple<string, string>("NL", "Netherlands"));
+            Countries.Add(new Tuple<string, string>("NZ", "New Zealand"));
+            Countries.Add(new Tuple<string, string>("NO", "Norway"));
+            Countries.Add(new Tuple<string, string>("PL", "Poland"));
+            Countries.Add(new Tuple<string, string>("PT", "Portugal"));
+            Countries.Add(new Tuple<string, string>("ES", "Spain"));
+            Countries.Add(new Tuple<string, string>("SE", "Sweden"));
+            Countries.Add(new Tuple<string, string>("CH", "Switzerland"));
 
             Classifications.Add("Sports");
             Classifications.Add("Music");
@@ -78,10 +82,11 @@ namespace TicketTracker
                 {
                     Events.Add(eventThing);
                 }
-            } catch
+            }
+            catch
             {
                 DisplayNoWifiDialog();
-                for(int i = 0; i < 100; i++)
+                for (int i = 0; i < 100; i++)
                 {
                     Events.Add(new Event { name = "Event Name", venueName = "Venue Name", image = null, id = "0" });
                 }
@@ -92,13 +97,14 @@ namespace TicketTracker
         private void Goto_Event_Details_Page(object sender, ItemClickEventArgs e)
         {
             var myEvent = e.ClickedItem as Event;
-            if(myEvent.id.Equals("0"))
+            if (myEvent.id.Equals("0"))
             {
                 DisplayNoWifiDialog();
-            } else
+            }
+            else
             {
                 Frame.Navigate(typeof(EventDetailPage), myEvent.id);
-            }     
+            }
         }
 
         private async void DisplayNoWifiDialog()
@@ -125,7 +131,8 @@ namespace TicketTracker
                 {
                     Events.Add(eventThing);
                 }
-            } catch
+            }
+            catch
             {
                 DisplayNoWifiDialog();
                 for (int i = 0; i < 100; i++)
@@ -133,7 +140,7 @@ namespace TicketTracker
                     Events.Add(new Event { name = "Event Name", venueName = "Venue Name", image = null, id = "0" });
                 }
             }
-            
+
         }
 
         private async void ClassificationBox_Tapped(object sender, TappedRoutedEventArgs e)
@@ -149,7 +156,8 @@ namespace TicketTracker
                 {
                     Events.Add(eventThing);
                 }
-            } catch
+            }
+            catch
             {
                 DisplayNoWifiDialog();
                 for (int i = 0; i < 100; i++)
@@ -157,7 +165,7 @@ namespace TicketTracker
                     Events.Add(new Event { name = "Event Name", venueName = "Venue Name", image = null, id = "0" });
                 }
             }
-            
+
         }
     }
 }

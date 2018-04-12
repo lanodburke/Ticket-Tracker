@@ -14,86 +14,10 @@ namespace TicketTracker
 {
     public class TicketMasterData
     {
-        /*
-BM (Bermuda)
-BR (Brazil)
-BG (Bulgaria)
-CA (Canada)
-CL (Chile)
-CN (China)
-CO (Colombia)
-CR (Costa Rica)
-HR (Croatia)
-CY (Cyprus)
-CZ (Czech Republic)
-DK (Denmark)
-DO (Dominican Republic)
-EC (Ecuador)
-EE (Estonia)
-FO (Faroe Islands)
-FI (Finland)
-FR (France)
-GE (Georgia)
-DE (Germany)
-GH (Ghana)
-GI (Gibraltar)
-GB (Great Britain)
-GR (Greece)
-HK (Hong Kong)
-HU (Hungary)
-IS (Iceland)
-IN (India)
-IE (Ireland)
-IL (Israel)
-IT (Italy)
-JM (Jamaica)
-JP (Japan)
-KR (Korea, Republic of)
-LV (Latvia)
-LB (Lebanon)
-LT (Lithuania)
-LU (Luxembourg)
-MY (Malaysia)
-MT (Malta)
-MX (Mexico)
-MC (Monaco)
-ME (Montenegro)
-MA (Morocco)
-NL (Netherlands)
-AN (Netherlands Antilles)
-NZ (New Zealand)
-ND (Northern Ireland)
-NO (Norway)
-PE (Peru)
-PL (Poland)
-PT (Portugal)
-RO (Romania)
-RU (Russian Federation)
-LC (Saint Lucia)
-SA (Saudi Arabia)
-RS (Serbia)
-SG (Singapore)
-SK (Slovakia)
-SI (Slovenia)
-ZA (South Africa)
-ES (Spain)
-SE (Sweden)
-CH (Switzerland)
-TW (Taiwan)
-TH (Thailand)
-TT (Trinidad and Tobago)
-TR (Turkey)
-UA (Ukraine)
-AE (United Arab Emirates)
-UY (Uruguay)
-VE (Venezuela)
-
-Classifications: Music, Sports, Film, Art & Theatre
-     */
         public async static Task<List<Event>> GetEventsByCountryId(string countryCode)
         {
             var http = new HttpClient();
-            var respone = await http.GetAsync("https://app.ticketmaster.com/discovery/v2/events.json?apikey=5AdNWJcac0sUjTXt0rQY5lnGJio8OvvN&size=50&countryCode=" + countryCode);
+            var respone = await http.GetAsync("https://app.ticketmaster.com/discovery/v2/events.json?apikey=5AdNWJcac0sUjTXt0rQY5lnGJio8OvvN&includeTest=no&size=100&countryCode=" + countryCode);
             var result = await respone.Content.ReadAsStringAsync();
             var serializer = new DataContractJsonSerializer(typeof(RootObject));
 
@@ -132,7 +56,7 @@ Classifications: Music, Sports, Film, Art & Theatre
         public async static Task<List<Event>> GetEventsByClassifcation(string classifcation)
         {
             var http = new HttpClient();
-            var respone = await http.GetAsync("https://app.ticketmaster.com/discovery/v2/events.json?apikey=5AdNWJcac0sUjTXt0rQY5lnGJio8OvvN&size=50&includeSpellcheck=yes&classificationName" + classifcation);
+            var respone = await http.GetAsync("https://app.ticketmaster.com/discovery/v2/events.json?apikey=5AdNWJcac0sUjTXt0rQY5lnGJio8OvvN&size=100&includeTest=no&includeSpellcheck=yes&classificationName=" + classifcation);
             var result = await respone.Content.ReadAsStringAsync();
             var serializer = new DataContractJsonSerializer(typeof(RootObject));
 

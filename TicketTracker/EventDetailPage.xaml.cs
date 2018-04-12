@@ -71,8 +71,8 @@ namespace TicketTracker
         {
             ContentDialog noWifiDialog = new ContentDialog
             {
-                Title = "Cannot connect to database",
-                Content = "Check your connection and try again.",
+                Title = "Error Occured.",
+                Content = "Cannot get event information at this time. Sorry for the inconvenience",
                 CloseButtonText = "Ok"
             };
 
@@ -138,6 +138,9 @@ namespace TicketTracker
                     }
 
                     if (myDetails.longitude == null || myDetails.latitude == null || myDetails.venueName == null)
+                    {
+                        
+                    } else
                     {
                         AddSpaceNeedleIcon(myDetails.longitude, myDetails.latitude, myDetails.venueName);
                     }
