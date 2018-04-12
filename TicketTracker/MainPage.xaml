@@ -30,7 +30,7 @@
     </Grid>-->
 
     <ScrollViewer VerticalScrollBarVisibility="Auto" VerticalScrollMode="Auto" HorizontalScrollBarVisibility="Disabled" HorizontalScrollMode="Disabled">
-    <Grid Background="LightGray">
+    <Grid Background="Gainsboro">
         <Grid.RowDefinitions>
             <RowDefinition Height="100"/>
             <RowDefinition Height="auto"/>
@@ -67,11 +67,11 @@
               Grid.Row="1" Grid.ColumnSpan="2">
                 <GridView.ItemTemplate>
                     <DataTemplate x:Name="EventDataTemplate" x:DataType="local:Event">
-                        <Grid Height="180" Width="320" AutomationProperties.Name="{x:Bind name}">
+                        <Grid Margin="10" Padding="3" Height="240" Width="320" AutomationProperties.Name="{x:Bind name}">
                             <Image Source="{x:Bind image}" Stretch="UniformToFill"/>
-                            <StackPanel Orientation="Vertical" Height="60" VerticalAlignment="Bottom" Opacity="0.80" Background="Azure" Padding="12">
-                                <TextBlock TextWrapping="WrapWholeWords"  Text="{x:Bind name}"/>
-                                <TextBlock TextWrapping="WrapWholeWords" Text="{x:Bind venueName}" Style="{ThemeResource CaptionTextBlockStyle}" Foreground="{ThemeResource SystemControlPageTextBaseMediumBrush}"/>
+                            <StackPanel Orientation="Vertical" Height="80" VerticalAlignment="Bottom" Opacity="0.80" Background="SkyBlue" Padding="12">
+                                <TextBlock FontSize="15" TextWrapping="WrapWholeWords" FontWeight="Bold" Text="{x:Bind name}"/>
+                                <TextBlock FontSize="12" Text="{x:Bind venueName}" Style="{ThemeResource CaptionTextBlockStyle}" Foreground="{ThemeResource SystemControlPageTextBaseMediumBrush}"/>
                             </StackPanel>
                         </Grid>
                     </DataTemplate>

@@ -116,8 +116,17 @@ Classifications: Music, Sports, Film, Art & Theatre
             for (int i = 0; i < data._embedded.events.Count(); i++)
             {
                 string name = data._embedded.events[i].name;
-                Console.WriteLine(name);
-                BitmapImage image = new BitmapImage(new Uri(data._embedded.events[i].images[1].url));
+                BitmapImage image = null;
+
+                for (int j = 0; j < data._embedded.events[i].images.Count(); j++)
+                {
+                    if (data._embedded.events[i].images[j].ratio.Equals("16_9"))
+                    {
+                        image = new BitmapImage(new Uri(data._embedded.events[i].images[j].url));
+                        break;
+                    }
+                }
+
                 string id = data._embedded.events[i].id;
                 string venueName = data._embedded.events[i]._embedded.venues[0].name;
                 Console.WriteLine(id);

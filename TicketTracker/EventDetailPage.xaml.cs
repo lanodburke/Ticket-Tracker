@@ -69,36 +69,46 @@ namespace TicketTracker
 
         private async void Page_Loaded(object sender, RoutedEventArgs e)
         {
-            RootObject1 myDetails = await TicketMasterDataEventDetails.GetEventDetails(this.eventId);
+            if (this.eventId != null)
+            {
+                RootObject1 myDetails = await TicketMasterDataEventDetails.GetEventDetails(this.eventId);
+                if (myDetails != null)
+                {
+                    eventImage.Source = myDetails.image;
+                    if (myDetails.name != null)
+                    {
+                        eventName.Text = myDetails.name;
+                    }
+                    else
+                    {
+                        eventName.Text = "Cannt find event name";
+                    }
 
-            eventImage.Source = myDetails.image;
-            if(myDetails.name != null)
-            {
-                eventName.Text = myDetails.name;
-            } else
-            {
-                eventName.Text = "Cannt find event name";
+                    if (myDetails.eventInfo != null)
+                    {
+                        eventInfo.Text = myDetails.eventInfo;
+                    }
+                    else
+                    {
+                        eventInfo.Text = "No info has been given for the event!";
+                    }
+
+                    if (myDetails.venueName != null)
+                    {
+                        venueName.Text = myDetails.venueName;
+                    }
+                    else
+                    {
+                        venueName.Text = "No venue has been given for this event at this current time!";
+                    }
+
+
+                    AddSpaceNeedleIcon(myDetails.longitude, myDetails.latitude, myDetails.venueName);
+                }
+
+            
             }
-
-            if(myDetails.eventInfo != null)
-            {
-                eventInfo.Text = myDetails.eventInfo;
-            } else
-            {
-                eventInfo.Text = "No info has been given for the event!";
-            }
-               
-            if(myDetails.venueName != null)
-            {
-                venueName.Text = myDetails.venueName;
-            } else
-            {
-                venueName.Text = "No venue has been given for this event at this current time!";
-            }
-
-
-
-            AddSpaceNeedleIcon(myDetails.longitude, myDetails.latitude, myDetails.venueName);
+            
         }
     }
 }
