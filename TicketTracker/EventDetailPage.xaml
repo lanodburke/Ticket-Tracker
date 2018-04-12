@@ -21,8 +21,8 @@
                         <ColumnDefinition Width="*"></ColumnDefinition>
                         <ColumnDefinition Width="*"></ColumnDefinition>
                     </Grid.ColumnDefinitions>
-                    <StackPanel BorderBrush="Gainsboro" BorderThickness="2" Grid.Row="0" Grid.Column="0">
-                        <Image x:Name="eventImage"  HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Stretch="Fill"></Image>
+                    <StackPanel Background="Gainsboro"  BorderBrush="Gainsboro" BorderThickness="3" Grid.Row="0" Grid.Column="0">
+                        <Image x:Name="eventImage" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Stretch="UniformToFill"></Image>
                     </StackPanel>
                     <StackPanel BorderBrush="Gainsboro" BorderThickness="2" Background="WhiteSmoke"  Grid.Row="0" Grid.Column="1" Padding="20">
                         <TextBlock FontSize="28" FontFamily="Arial" FontWeight="Bold" x:Name="eventName" TextWrapping="WrapWholeWords"></TextBlock>

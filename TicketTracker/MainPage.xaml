@@ -8,17 +8,15 @@
     Loaded="Page_Loaded"
     mc:Ignorable="d">
 
-    <ScrollViewer VerticalScrollBarVisibility="Auto" VerticalScrollMode="Auto" HorizontalScrollBarVisibility="Disabled" HorizontalScrollMode="Disabled">
-    <Grid Background="Gainsboro">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="100"/>
-            <RowDefinition Height="auto"/>
-        </Grid.RowDefinitions>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"></ColumnDefinition>
-                <ColumnDefinition Width="*"></ColumnDefinition>
-            </Grid.ColumnDefinitions>
-        <StackPanel Grid.Row="0" Grid.Column="0" Padding="15">
+    <SplitView x:Name="splitView" PaneBackground="{ThemeResource SystemControlBackgroundChromeMediumLowBrush}" IsPaneOpen="True" OpenPaneLength="256" CompactPaneLength="48" DisplayMode="Inline">
+        <SplitView.Pane>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                </Grid.RowDefinitions>
+                
+                <StackPanel Grid.Row="0" Padding="15">
                 <ComboBox x:Name="CountriesCombo" Header="Select Country Code" Height="60" Width="auto"
                       ItemsSource="{x:Bind Countries}">
                     <ComboBox.ItemTemplate>
@@ -28,7 +26,7 @@
                     </ComboBox.ItemTemplate>
                 </ComboBox>
             </StackPanel>
-            <StackPanel Grid.Row="0" Grid.Column="1" Padding="15">
+            <StackPanel Grid.Row="1" Padding="15">
                 <ComboBox x:Name="ClassificationsCombo" Header="Select Event Type" Height="60" Width="auto"
                       ItemsSource="{x:Bind Classifications}">
                     <ComboBox.ItemTemplate>
@@ -38,30 +36,33 @@
                     </ComboBox.ItemTemplate>
                 </ComboBox>
             </StackPanel>
-
-            <GridView ItemsSource="{x:Bind Events}"
+            </Grid>
+        </SplitView.Pane>
+        <ScrollViewer VerticalScrollBarVisibility="Auto" VerticalScrollMode="Auto" HorizontalScrollBarVisibility="Disabled" HorizontalScrollMode="Disabled">
+            <Grid Background="Gainsboro">
+                <GridView ItemsSource="{x:Bind Events}"
               IsTapEnabled="True"
               IsItemClickEnabled="True"
-              ItemClick="Goto_Event_Details_Page"
-              Grid.Row="1" Grid.ColumnSpan="2">
-                <GridView.ItemTemplate>
-                    <DataTemplate x:Name="EventDataTemplate" x:DataType="local:Event">
-                        <Grid Margin="10" Padding="3" Height="240" Width="320" AutomationProperties.Name="{x:Bind name}">
-                            <Image Source="{x:Bind image}" Stretch="Fill"/>
-                            <StackPanel Orientation="Vertical" Height="80" VerticalAlignment="Bottom" Opacity="0.80" Background="SkyBlue" Padding="12">
-                                <TextBlock FontSize="15" TextWrapping="WrapWholeWords" FontWeight="Bold" Text="{x:Bind name}"/>
-                                <TextBlock FontSize="12" Text="{x:Bind venueName}" Style="{ThemeResource CaptionTextBlockStyle}" Foreground="{ThemeResource SystemControlPageTextBaseMediumBrush}"/>
-                            </StackPanel>
-                        </Grid>
-                    </DataTemplate>
-                </GridView.ItemTemplate>
-                <GridView.ItemsPanel>
-                    <ItemsPanelTemplate>
-                        <ItemsWrapGrid MaximumRowsOrColumns="4" Orientation="Horizontal"/>
-                    </ItemsPanelTemplate>
-                </GridView.ItemsPanel>
-            </GridView>
-        </Grid>
-    </ScrollViewer>
-
+              ItemClick="Goto_Event_Details_Page">
+                    <GridView.ItemTemplate>
+                        <DataTemplate x:Name="EventDataTemplate" x:DataType="local:Event">
+                            <Grid Margin="10" Padding="3" Height="240" Width="320" AutomationProperties.Name="{x:Bind name}">
+                                <Image Source="{x:Bind image}" Stretch="Fill"/>
+                                <StackPanel Orientation="Vertical" Height="80" VerticalAlignment="Bottom" Opacity="0.80" Background="SkyBlue" Padding="12">
+                                    <TextBlock FontSize="15" TextWrapping="WrapWholeWords" FontWeight="Bold" Text="{x:Bind name}"/>
+                                    <TextBlock FontSize="12" Text="{x:Bind venueName}" Style="{ThemeResource CaptionTextBlockStyle}" Foreground="{ThemeResource SystemControlPageTextBaseMediumBrush}"/>
+                                </StackPanel>
+                            </Grid>
+                        </DataTemplate>
+                    </GridView.ItemTemplate>
+                    <GridView.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <ItemsWrapGrid MaximumRowsOrColumns="4" Orientation="Horizontal"/>
+                        </ItemsPanelTemplate>
+                    </GridView.ItemsPanel>
+                </GridView>
+            </Grid>
+        </ScrollViewer>
+    </SplitView>
+    
 </Page>
