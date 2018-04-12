@@ -8,27 +8,6 @@
     Loaded="Page_Loaded"
     mc:Ignorable="d">
 
-    <!--<Page.Resources>
-        <DataTemplate x:DataType="local:Event" x:Key="EventDataTemplate">
-            <StackPanel>
-                <TextBlock x:Name="eventId" Text="{x:Bind id}" FontSize="12" Foreground="Black" />
-                <Image x:Name="eventImage" Source="{x:Bind image}" Width="145" Height="214"/>
-                <TextBlock x:Name="eventName" Text="{x:Bind name}" FontSize="16" Foreground="Black"/>
-            </StackPanel>
-        </DataTemplate>
-    </Page.Resources>
-    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="*" />
-            <RowDefinition Height="100" />
-        </Grid.RowDefinitions>
-
-        <GridView Grid.Row="0" ItemsSource="{x:Bind Events}" ItemTemplate="{StaticResource EventDataTemplate}">
-
-        </GridView>
-
-    </Grid>-->
-
     <ScrollViewer VerticalScrollBarVisibility="Auto" VerticalScrollMode="Auto" HorizontalScrollBarVisibility="Disabled" HorizontalScrollMode="Disabled">
     <Grid Background="Gainsboro">
         <Grid.RowDefinitions>
@@ -68,7 +47,7 @@
                 <GridView.ItemTemplate>
                     <DataTemplate x:Name="EventDataTemplate" x:DataType="local:Event">
                         <Grid Margin="10" Padding="3" Height="240" Width="320" AutomationProperties.Name="{x:Bind name}">
-                            <Image Source="{x:Bind image}" Stretch="UniformToFill"/>
+                            <Image Source="{x:Bind image}" Stretch="Fill"/>
                             <StackPanel Orientation="Vertical" Height="80" VerticalAlignment="Bottom" Opacity="0.80" Background="SkyBlue" Padding="12">
                                 <TextBlock FontSize="15" TextWrapping="WrapWholeWords" FontWeight="Bold" Text="{x:Bind name}"/>
                                 <TextBlock FontSize="12" Text="{x:Bind venueName}" Style="{ThemeResource CaptionTextBlockStyle}" Foreground="{ThemeResource SystemControlPageTextBaseMediumBrush}"/>
@@ -84,36 +63,5 @@
             </GridView>
         </Grid>
     </ScrollViewer>
-
-    <!--<Grid Background="LightGray">
-        <GridView Name="EventItemGrid"
-                  ItemsSource="{x:Bind Events}"
-                  HorizontalAlignment="Stretch"
-                  Margin="10,0,0,0"
-                  IsTapEnabled="True"
-                  IsItemClickEnabled="True"
-                  ItemClick="Goto_Event_Details_Page">
-            <GridView.ItemTemplate>
-                <DataTemplate x:DataType="local:Event">
-                    <Grid Background="White"
-                          Margin="10"
-                          Height="270"
-                          Width="200">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="*"/>
-                        </Grid.RowDefinitions>
-                        <Image x:Name="eventImage" Source="{x:Bind image}"/>
-                        <StackPanel Grid.Row="1" Margin="5">
-                            <TextBlock x:Name="eventName" Text="{x:Bind name}" FontSize="18" TextWrapping="Wrap"/>
-                        </StackPanel>
-                    </Grid>
-
-                </DataTemplate>
-            </GridView.ItemTemplate>
-
-
-        </GridView>
-    </Grid>-->
 
 </Page>

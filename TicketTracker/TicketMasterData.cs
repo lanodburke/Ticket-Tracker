@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Net.Http;
 using System.Runtime.Serialization;
@@ -118,13 +119,18 @@ Classifications: Music, Sports, Film, Art & Theatre
                 string name = data._embedded.events[i].name;
                 BitmapImage image = null;
 
-                for (int j = 0; j < data._embedded.events[i].images.Count(); j++)
+                // 10 images for each event
+                for (int j = 0; j < 10; j++)
                 {
-                    if (data._embedded.events[i].images[j].ratio.Equals("16_9"))
+                    if (data._embedded.events[i].images[j].height.Equals(576)
+                        && data._embedded.events[i].images[j].width.Equals(1024))
                     {
+                        Debug.WriteLine("URL" + data._embedded.events[i].images[j].url + " Width=" + 
+                           data._embedded.events[i].images[j].width + " Height=" + data._embedded.events[i].images[j].height
+                           + " Ratio=" + data._embedded.events[i].images[j].ratio);
                         image = new BitmapImage(new Uri(data._embedded.events[i].images[j].url));
-                        break;
-                    }
+                        j = 10;
+                    } 
                 }
 
                 string id = data._embedded.events[i].id;
