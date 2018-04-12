@@ -38,9 +38,13 @@ namespace TicketTracker
                 }
             }
 
+            string id = data.id;
             string eventInfo = data.info;
             string note = data.pleaseNote;
             string url = data.url;
+
+            string date = data.dates.start.dateTime;
+            DateTime parsedDate = DateTime.Parse(date);
 
             string venuName = data._embedded.venues[0].name;
             Address2 address = data._embedded.venues[0].address;
@@ -57,10 +61,10 @@ namespace TicketTracker
                 attractions.Add(new Attraction4 { name = attractionName, url = attractionUrl });
             }
 
-            rootObject1 = new RootObject1 { name = name, image = image,
+            rootObject1 = new RootObject1 { id = id, name = name, image = image,
                 eventInfo = eventInfo, address = address,
                 longitude = longitude, latitude = latitude,
-                venueName = venuName, attraction4 = attractions, info = note, url = url };
+                venueName = venuName, attraction4 = attractions, info = note, url = url, date = parsedDate };
 
             return rootObject1;
         }
@@ -580,6 +584,7 @@ namespace TicketTracker
     [DataContract]
     public class RootObject1
     {
+        public DateTime date { get; set; }
         public string latitude { get; set; }
         public string longitude { get; set; }
         public string venueName { get; set; }

@@ -112,8 +112,12 @@ namespace TicketTracker
                     if(myDetails.url != null)
                     {
                         urlInfo.Text = "To buy tickets, click the following link.";
-                        url.Content = "www.ticketmaster.com/" + myDetails.id;
+                        url.Content = "www.ticketmaster.com/event/" + myDetails.id;
                         url.NavigateUri = new Uri(myDetails.url);
+                    }
+                    if(myDetails.date != null)
+                    {
+                        //eventDate.Text = String.Format myDetails.date;
                     }
 
 

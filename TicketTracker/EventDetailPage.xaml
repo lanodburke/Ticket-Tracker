@@ -27,6 +27,7 @@
                     <StackPanel Background="Azure"  Grid.Row="0" Grid.Column="1" Padding="20">
                         <TextBlock FontSize="34" FontFamily="Arial" FontWeight="Bold" x:Name="eventName" TextWrapping="WrapWholeWords"></TextBlock>
                         <TextBlock x:Name="venueName" TextWrapping="WrapWholeWords"></TextBlock>
+                        <TextBlock x:Name="eventDate"></TextBlock>
                         <TextBlock x:Name="urlInfo"></TextBlock>
                         <HyperlinkButton x:Name="url"></HyperlinkButton>
                     </StackPanel>
