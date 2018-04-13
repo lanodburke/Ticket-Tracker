@@ -2,6 +2,29 @@
 
 Universal Windows Application(UWP) that lets users search events in their country and sort them by genre. This is a college project for the Mobile Applications Development module at GMIT.
 
+## Demonstration
+
+![Alt Text](https://media.giphy.com/media/1mgPnZpm30IIorrh9t/giphy.gif)
+
+## Getting Started
+
+To run the application on your local machine you will need to have Visual Studio 2017 installed. 
+The App will not run on Visual Studio 2015.
+
+* First you will need to clone the repository
+
+  ```
+  git clone https://github.com/lanodburke/Ticket-Tracker.git
+  ```
+  
+* After cloning the repo, change directory to the Ticket-Tracker folder.
+
+  ```
+  cd Ticket-Tracker
+  ```
+
+* In the Ticket-Tracker folder you will see the file TicketTracker.sln, run the file and open it with Visual Studio 2017.
+
 ## Requirements
 
 * Well-designed UI that is fit for purpose and provides a good user experience.
@@ -36,24 +59,6 @@ I used the Frame.Navigate method and the OnNavigatedTo method to pass parameters
 When the EventDetailPage is loaded it makes an API call to Ticketmaster's event details endpoint. The page has two Pivot items; Details and Map.
 The Details page displays the event image, event name, venue name, start date, event info, venue info and a link to buy the tickets off of ticketmasters website.
 
-            Countries.Add(new Tuple<string, string>("CA", "Canada"));
-            Countries.Add(new Tuple<string, string>("AU", "Australia"));
-            Countries.Add(new Tuple<string, string>("AT", "Austria"));
-            Countries.Add(new Tuple<string, string>("BE", "Belgium"));
-            Countries.Add(new Tuple<string, string>("DK", "Denmark"));
-            Countries.Add(new Tuple<string, string>("FR", "France"));
-            Countries.Add(new Tuple<string, string>("GB", "Great Britain"));
-            Countries.Add(new Tuple<string, string>("LU", "Luxembourg"));
-            Countries.Add(new Tuple<string, string>("MX", "Mexico"));
-            Countries.Add(new Tuple<string, string>("NL", "Netherlands"));
-            Countries.Add(new Tuple<string, string>("NZ", "New Zealand"));
-            Countries.Add(new Tuple<string, string>("NO", "Norway"));
-            Countries.Add(new Tuple<string, string>("PL", "Poland"));
-            Countries.Add(new Tuple<string, string>("PT", "Portugal"));
-            Countries.Add(new Tuple<string, string>("ES", "Spain"));
-            Countries.Add(new Tuple<string, string>("SE", "Sweden"));
-            Countries.Add(new Tuple<string, string>("CH", "Switzerland"));
-
 ## Supported Countries
 | Country Code   | Country |
 | :--| :---------------|
@@ -66,43 +71,22 @@ The Details page displays the event image, event name, venue name, start date, e
 | DK | Denmark         |
 | FR | France          |
 | GB | Great Britain   |
+| LU | Luxembourg      |
+| MX | Mexico          |
+| NL | Netherlands     |
+| NZ | New Zealand     |
+| NO | Norway          |
+| PL | Poland          |
+| PT | Portugal        |
+| ES | Spain           |
+| SE | Sweden          |
+| CH | Switzerland     |
 
-## Demonstration
+## Built With.
 
-
-
-## Getting Started
-
-To run the application on your local machine you will need to have Visual Studio 2017 installed. 
-The App will not run on Visual Studio 2015.
-
-* First you will need to clone the repository
-
-  ```
-  git clone https://github.com/lanodburke/Ticket-Tracker.git
-  ```
-  
-* After cloning the repo, change directory to the Ticket-Tracker folder.
-
-  ```
-  cd Ticket-Tracker
-  ```
-
-* In the Ticket-Tracker folder you will see the file TicketTracker.sln, run the file and open it with Visual Studio 2017.
-
-## Built With. Install the neccessary packages if you are prompted to do so.
-
-* [Ticketmaster API](http://www.dropwizard.io/1.0.2/docs/) - The web framework used
-* [Maven](https://maven.apache.org/) - Dependency Management
-* [ROME](https://rometools.github.io/rome/) - Used to generate RSS Feeds
-
-## Contributing
-
-Please read [CONTRIBUTING.md](https://gist.github.com/PurpleBooth/b24679402957c63ec426) for details on our code of conduct, and the process for submitting pull requests to us.
-
-## Versioning
-
-We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/your/project/tags). 
+* [Ticketmaster API](https://developer.ticketmaster.com/products-and-docs/apis/discovery-api/v2/) - The API used
+* [UWP](https://docs.microsoft.com/en-us/windows/uwp/) - Universal Windows Platform
+* [JSON2CSHARP](http://json2csharp.com/) - JSON to C# convertor
 
 ## Authors
 
