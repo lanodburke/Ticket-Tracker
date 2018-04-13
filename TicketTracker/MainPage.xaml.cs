@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
@@ -146,7 +145,6 @@ namespace TicketTracker
         private async void ClassificationBox_Tapped(object sender, TappedRoutedEventArgs e)
         {
             var classificationName = ((TextBlock)sender).Text;
-            Debug.WriteLine(classificationName);
 
             Events.Clear();
 

@@ -45,7 +45,6 @@ namespace TicketTracker
 
                 string id = data._embedded.events[i].id;
                 string venueName = data._embedded.events[i]._embedded.venues[0].name;
-                Console.WriteLine(id);
 
                 events.Add(new Event { id = id, name = name, image = image,
                     venueName = venueName});
@@ -69,7 +68,6 @@ namespace TicketTracker
             for (int i = 0; i < data._embedded.events.Count(); i++)
             {
                 string name = data._embedded.events[i].name;
-                Console.WriteLine(name);
                 BitmapImage image = null;
 
                 // 10 images for each event
@@ -84,7 +82,6 @@ namespace TicketTracker
                 }
                 string id = data._embedded.events[i].id;
                 string venueName = data._embedded.events[i]._embedded.venues[0].name;
-                Console.WriteLine(id);
 
                 events.Add(new Event
                 {
