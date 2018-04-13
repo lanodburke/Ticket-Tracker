@@ -31,6 +31,7 @@ namespace TicketTracker
             this.InitializeComponent();
         }
 
+        // When page is navigated to get the eventId
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             this.eventId = (string)e.Parameter;
@@ -38,6 +39,7 @@ namespace TicketTracker
 
         private string eventId;
 
+        // Add needleIcon to map with venueName
         public void AddSpaceNeedleIcon(string longitude, string latitude, string venueName)
         {
             var MyLandmarks = new List<MapElement>();
@@ -67,6 +69,7 @@ namespace TicketTracker
             myMap.ZoomLevel = 14;
         }
 
+        // Display no connection dialog box
         private async void DisplayNoWifiDialog()
         {
             ContentDialog noWifiDialog = new ContentDialog
@@ -79,13 +82,17 @@ namespace TicketTracker
             ContentDialogResult result = await noWifiDialog.ShowAsync();
         }
 
+        // When page is loaded call this method
         private async void Page_Loaded(object sender, RoutedEventArgs e)
         {
             try
             {
+                // event details
                 RootObject1 myDetails = await TicketMasterDataEventDetails.GetEventDetails(this.eventId);
+                // if object is not null
                 if (myDetails != null)
                 {
+                    // event image
                     eventImage.Source = myDetails.image;
                     if (myDetails.name != null)
                     {

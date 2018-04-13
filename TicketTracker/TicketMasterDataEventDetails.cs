@@ -12,6 +12,7 @@ namespace TicketTracker
 {
     class TicketMasterDataEventDetails
     {
+        // Send request to Ticketmasters API with the eventId 
         public async static Task<RootObject1> GetEventDetails(string eventId)
         {
             var http = new HttpClient();
@@ -25,56 +26,61 @@ namespace TicketTracker
 
             RootObject1 rootObject1;
 
+            // event name
             string name = data.name;
+            
+            // event image
             BitmapImage image = null;
 
+            // Loop over event images
             for (int i = 0; i < 10; i++)
             {
+                // get image with proper resolution
                 if (data.images[i].height.Equals(576)
                     && data.images[i].width.Equals(1024))
                 {
                     image = new BitmapImage(new Uri(data.images[i].url));
+                    // exit loop
                     i = 10;
                 }
             }
 
+            // event id
             string id = data.id;
+            // event info
             string eventInfo = data.info;
+            // event note
             string note = data.pleaseNote;
+            // event url
             string url = data.url;
 
+            // event data
             string date = data.dates.start.dateTime;
+            // Parse string to DateTime object
             DateTime parsedDate = DateTime.Parse(date);
 
+            // venueName
             string venuName = data._embedded.venues[0].name;
-            Address2 address = data._embedded.venues[0].address;
+            // longitude
             string longitude = data._embedded.venues[0].location.longitude;
+            // latitude
             string latitude = data._embedded.venues[0].location.latitude;
 
-            var attractions = new List<Attraction4>();
-
-            for(int i = 0; i < data._embedded.attractions.Count(); i++)
-            {
-                string attractionName = data._embedded.attractions[i].name;
-                string attractionUrl = data._embedded.attractions[i].url;
-
-                attractions.Add(new Attraction4 { name = attractionName, url = attractionUrl });
-            }
-
             rootObject1 = new RootObject1 { id = id, name = name, image = image,
-                eventInfo = eventInfo, address = address,
+                eventInfo = eventInfo, 
                 longitude = longitude, latitude = latitude,
-                venueName = venuName, attraction4 = attractions, info = note, url = url, date = parsedDate };
+                venueName = venuName, info = note, url = url, date = parsedDate };
 
             return rootObject1;
         }
     }
 
 
-
+    // DataContract classes
     [DataContract]
     public class Image3
     {
+        // DataMember
         [DataMember]
         public string ratio { get; set; }
         [DataMember]
@@ -589,11 +595,9 @@ namespace TicketTracker
         public string longitude { get; set; }
         public string venueName { get; set; }
         public string eventInfo { get; set; }
-        public Address2 address { get; set; }
         public GeneralInfo genInfo { get; set; }
         public Location2 location { get; set; }
         public BitmapImage image { get; set; }
-        public List<Attraction4> attraction4 { get; set; }
         [DataMember]
         public string info { get; set; }
         [DataMember]

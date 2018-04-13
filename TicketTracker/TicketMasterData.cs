@@ -16,34 +16,49 @@ namespace TicketTracker
     {
         public async static Task<List<Event>> GetEventsByCountryId(string countryCode)
         {
+            // new HttpClicent
             var http = new HttpClient();
+            // response from the server
             var respone = await http.GetAsync("https://app.ticketmaster.com/discovery/v2/events.json?apikey=5AdNWJcac0sUjTXt0rQY5lnGJio8OvvN&includeTest=no&size=100&countryCode=" + countryCode);
+            // convert response to string
             var result = await respone.Content.ReadAsStringAsync();
+            // deserialize JSON into strong typed classes
             var serializer = new DataContractJsonSerializer(typeof(RootObject));
 
+            // MemoryStream of result
             var ms = new System.IO.MemoryStream(Encoding.UTF8.GetBytes(result));
 
+            // assign deserialized JSON to data
             var data = (RootObject)serializer.ReadObject(ms);
 
+            // List of Events
             var events = new List<Event>();
 
+            // Loop over the data
             for (int i = 0; i < data._embedded.events.Count(); i++)
             {
+                // event name
                 string name = data._embedded.events[i].name;
+                // event image
                 BitmapImage image = null;
 
-                // 10 images for each event
+                // loop over the images
                 for (int j = 0; j < 10; j++)
                 {
+                    // get image with resoultion 16:9 and height and width of 576 and 1024
                     if (data._embedded.events[i].images[j].height.Equals(576)
                         && data._embedded.events[i].images[j].width.Equals(1024))
                     {
+                        // assign image 
                         image = new BitmapImage(new Uri(data._embedded.events[i].images[j].url));
+                        // exit loop
                         j = 10;
                     } 
                 }
 
+                // event id
                 string id = data._embedded.events[i].id;
+                // venue name
                 string venueName = data._embedded.events[i]._embedded.venues[0].name;
 
                 events.Add(new Event { id = id, name = name, image = image,
@@ -52,6 +67,7 @@ namespace TicketTracker
             return events;
         }
 
+        // Get events by event type instead of countryCode
         public async static Task<List<Event>> GetEventsByClassifcation(string classifcation)
         {
             var http = new HttpClient();
@@ -95,9 +111,11 @@ namespace TicketTracker
         }
 }
 
+    // DataContract each class
     [DataContract]
     public class Image
     {
+        // Add DataMembers
         [DataMember]
         public string ratio { get; set; }
         [DataMember]

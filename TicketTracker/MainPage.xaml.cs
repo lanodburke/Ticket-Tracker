@@ -22,16 +22,21 @@ using Windows.UI.Xaml.Shapes;
 namespace TicketTracker
 {
     /// <summary>
-    /// An empty page that can be used on its own or navigated to within a Frame.
+    /// MainPage that display all of the events in a gridview
     /// </summary>
     public sealed partial class MainPage : Windows.UI.Xaml.Controls.Page, INotifyPropertyChanged
     {
+        // Observable Collection of tuples with countryCode mapped to the country name that is bound to a ComboBox
         private ObservableCollection<Tuple<string, string>> Countries = new ObservableCollection<Tuple<string, string>>();
+        // Observable Collection of event classifcations i.e Music, Sports, Film etc
         private ObservableCollection<string> Classifications = new ObservableCollection<string>();
 
         public MainPage()
         {
             this.InitializeComponent();
+            /* Adding all of the country codes that are supported
+               at one point I tried using all of the country codes that were listed on the API.
+               but ending up removing them as they were not working.*/
             Countries.Add(new Tuple<string, string>("US", "United States"));
             Countries.Add(new Tuple<string, string>("IE", "Ireland"));
             Countries.Add(new Tuple<string, string>("CA", "Canada"));
@@ -52,6 +57,7 @@ namespace TicketTracker
             Countries.Add(new Tuple<string, string>("SE", "Sweden"));
             Countries.Add(new Tuple<string, string>("CH", "Switzerland"));
 
+            // Adding event classifcations to observable collection
             Classifications.Add("Sports");
             Classifications.Add("Music");
             Classifications.Add("Arts & Theatre");
@@ -71,12 +77,15 @@ namespace TicketTracker
             }
         }
 
+        // Observable Collection of Events that are bound to a GridView
         private ObservableCollection<Event> Events = new ObservableCollection<Event>();
 
         private async void Page_Loaded(object sender, RoutedEventArgs e)
         {
             try
             {
+                // Loop through each element that is return from the GetEventsByCountryId method
+                // and append them to the observable collection
                 foreach (var eventThing in await TicketMasterData.GetEventsByCountryId("IE"))
                 {
                     Events.Add(eventThing);
@@ -84,33 +93,42 @@ namespace TicketTracker
             }
             catch
             {
-                DisplayNoWifiDialog();
+                // If there is an exception display dialog box to warn user
+                ExceptionDialogBox();
+                // Add 100 empty events to the grid
                 for (int i = 0; i < 100; i++)
                 {
+                    // eventId is set to 0
                     Events.Add(new Event { name = "Event Name", venueName = "Venue Name", image = null, id = "0" });
                 }
             }
 
         }
 
+        // Navigate to event details page
         private void Goto_Event_Details_Page(object sender, ItemClickEventArgs e)
         {
+            // eventId need to query API for event details
             var myEvent = e.ClickedItem as Event;
+            // If it is 0 then display dialog box
             if (myEvent.id.Equals("0"))
             {
-                DisplayNoWifiDialog();
+                ExceptionDialogBox();
             }
             else
             {
+                // If there is no exception navigate user to EventDetailPage and pass
+                // in event id
                 Frame.Navigate(typeof(EventDetailPage), myEvent.id);
             }
         }
 
-        private async void DisplayNoWifiDialog()
+        // Dialog box to be display when exception occurs
+        private async void ExceptionDialogBox()
         {
             ContentDialog noWifiDialog = new ContentDialog
             {
-                Title = "Cannot connect to database",
+                Title = "Cannot connect to API",
                 Content = "Check your connection and try again.",
                 CloseButtonText = "Ok"
             };
@@ -118,14 +136,19 @@ namespace TicketTracker
             ContentDialogResult result = await noWifiDialog.ShowAsync();
         }
 
+        // When user clicks on Item in ComboBox
         private async void CountryBox_Tapped(object sender, TappedRoutedEventArgs e)
         {
+            // get countryCode of TextBlock
             var countryCode = ((TextBlock)sender).Tag;
 
+            // Remove all previous events from the page
             Events.Clear();
 
             try
             {
+                // Loop through each element that is return from the GetEventsByCountryId method
+                // and append them to the observable collection
                 foreach (var eventThing in await TicketMasterData.GetEventsByCountryId((string)countryCode))
                 {
                     Events.Add(eventThing);
@@ -133,7 +156,8 @@ namespace TicketTracker
             }
             catch
             {
-                DisplayNoWifiDialog();
+                // If there is an exception display dialog box to warn user
+                ExceptionDialogBox();
                 for (int i = 0; i < 100; i++)
                 {
                     Events.Add(new Event { name = "Event Name", venueName = "Venue Name", image = null, id = "0" });
@@ -142,14 +166,19 @@ namespace TicketTracker
 
         }
 
+        // When user clicks on event type
         private async void ClassificationBox_Tapped(object sender, TappedRoutedEventArgs e)
         {
+            // get event type 
             var classificationName = ((TextBlock)sender).Text;
 
+            // remove events from collection
             Events.Clear();
 
             try
             {
+                // Loop through each element that is return from the GetEventsByCountryId method
+                // and append them to the observable collection
                 foreach (var eventThing in await TicketMasterData.GetEventsByClassifcation(classificationName))
                 {
                     Events.Add(eventThing);
@@ -157,7 +186,8 @@ namespace TicketTracker
             }
             catch
             {
-                DisplayNoWifiDialog();
+                // If there is an exception alert user
+                ExceptionDialogBox();
                 for (int i = 0; i < 100; i++)
                 {
                     Events.Add(new Event { name = "Event Name", venueName = "Venue Name", image = null, id = "0" });
