@@ -61,6 +61,12 @@ The Details page displays the event image, event name, venue name, start date, e
 
 The Map Pivot display a Map Control with the longitude and latitude of the event and the venueName with a pin.
 
+## Windows Store Certifcation Results
+<a href="https://imgur.com/a/CCz6p"><img src="https://imgur.com/JbML7bK.png"/></a>
+<a href="https://imgur.com/a/CCz6p"><img src="https://imgur.com/bpYAbfZ.png"/></a>
+<a href="https://imgur.com/a/CCz6p"><img src="https://imgur.com/RN9S3Wc.png"/></a>
+<a href="https://imgur.com/a/CCz6p"><img src="https://imgur.com/e93gXN9.png"/></a>
+
 ## Supported Countries
 | Country Code   | Country |
 | :--| :---------------|
