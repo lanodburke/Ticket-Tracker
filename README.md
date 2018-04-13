@@ -59,6 +59,8 @@ I used the Frame.Navigate method and the OnNavigatedTo method to pass parameters
 When the EventDetailPage is loaded it makes an API call to Ticketmaster's event details endpoint. The page has two Pivot items; Details and Map.
 The Details page displays the event image, event name, venue name, start date, event info, venue info and a link to buy the tickets off of ticketmasters website.
 
+The Map Pivot display a Map Control with the longitude and latitude of the event and the venueName with a pin.
+
 ## Supported Countries
 | Country Code   | Country |
 | :--| :---------------|
