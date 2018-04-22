@@ -2,6 +2,8 @@
 
 Universal Windows Application(UWP) that lets users search events in their country and sort them by genre. This is a college project for the Mobile Applications Development module at GMIT.
 
+The App is currently avaiable for download on the windows store, if you would like to download the app follow this link [here](https://www.microsoft.com/en-us/store/p/tickettracker/9p0f5t5sfqpj?activetab=pivot%3aoverviewtab).
+
 ## Demonstration
 
 ![Alt Text](https://media.giphy.com/media/1mgPnZpm30IIorrh9t/giphy.gif)
